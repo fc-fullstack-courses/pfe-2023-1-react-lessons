@@ -33,14 +33,39 @@ const reactPar = React.createElement(
 
 */
 
-// const elem = React.createElement(
+// JSX - JS eXtended - розширення мови JS, створенно для того щоб зручніше робити реакт компоненти
+
+const user = {
+  id: 1,
+  name: 'Test User',
+};
+
+// const oldElem = React.createElement(
 //   'h1',
-//   { className: 'text', id: 'asdsd', title: 'sadsada' },
-//   'asdsadsdsds'
+//   { className: 'text', id: 'asdsd', title: user.name },
+//   `Hello ${user.name}`
 // );
 
-// JSX - JS eXtended - розширення мови JS, створенно для того щоб зручніше робити реакт компоненти
-const elem = <h1 className="text" id="asdsd" title="sadsada">Hello React</h1>;
+const elem = (
+  <h1 className="text" id="asdsd" title={user.name}>
+    Hello {user.name}
+  </h1>
+);
+const elem2 = <input />;
+
+// const elem3 = React.createElement('div', null, 
+//   React.createElement('p', null, '1'),
+//   React.createElement('p', null, '2'),
+//   React.createElement('p', null, '3'),
+// );
+
+const elem3 = (
+  <div>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+  </div>
+);
 
 root.render(elem);
 
