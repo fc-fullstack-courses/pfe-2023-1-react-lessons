@@ -17,17 +17,29 @@ const htmlContainer = document.getElementById('root');
 
 const root = ReactDOM.createRoot(htmlContainer);
 
-const reactPar = React.createElement('p', {className : 'text'}, 'Hello from React!');
+const reactPar = React.createElement(
+  'p',
+  { className: 'text' },
+  'Hello from React!'
+);
 
 // console.log(reactPar);
 
-root.render(reactPar);
+// root.render(reactPar);
 
 /*
   за допомогою реакту відмалювати у якомусь контейнері
   заголовочок з текстом і класом
-  
+
 */
+
+const elem = React.createElement(
+  'h1',
+  { className: 'text', id: 'asdsd', title: 'sadsada' },
+  'asdsadsdsds'
+);
+
+root.render(elem);
 
 /*
   відмалювати параграф зі стилями та текстом у діві
