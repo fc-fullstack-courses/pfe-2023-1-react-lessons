@@ -33,11 +33,14 @@ const reactPar = React.createElement(
 
 */
 
-const elem = React.createElement(
-  'h1',
-  { className: 'text', id: 'asdsd', title: 'sadsada' },
-  'asdsadsdsds'
-);
+// const elem = React.createElement(
+//   'h1',
+//   { className: 'text', id: 'asdsd', title: 'sadsada' },
+//   'asdsadsdsds'
+// );
+
+// JSX - JS eXtended - розширення мови JS, створенно для того щоб зручніше робити реакт компоненти
+const elem = <h1 className="text" id="asdsd" title="sadsada">Hello React</h1>;
 
 root.render(elem);
 
