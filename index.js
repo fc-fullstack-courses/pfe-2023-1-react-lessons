@@ -23,6 +23,11 @@ const reactPar = React.createElement('p', {className : 'text'}, 'Hello from Reac
 
 root.render(reactPar);
 
+/*
+  за допомогою реакту відмалювати у якомусь контейнері
+  заголовочок з текстом і класом
+  
+*/
 
 /*
   відмалювати параграф зі стилями та текстом у діві
