@@ -2,6 +2,7 @@ import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Greeting from './components/Greetings';
 import './App.css';
+import TextElement from './components/TextElement';
 
 const user1 = {
   name: 'User',
@@ -26,6 +27,8 @@ function App() {
       <Greeting user={user1} />
       <Greeting user={user2} />
       <Greeting user={user3} />
+      <TextElement text="Long lorem ipsum text" tooltip="this is title"/>
+      <TextElement text="Other text" tooltip="other title"/>
     </>
   );
 }
