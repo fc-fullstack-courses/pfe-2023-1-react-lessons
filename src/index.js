@@ -9,19 +9,24 @@ import './index.css';
 */
 
 // класовий компонент
-// має успадковуватися від React.Component 
-class Heading extends React.Component {
-
+// має успадковуватися від React.Component
+class HeadingClass extends React.Component {
   // має мати метод render
-  render () {
+  render() {
     // має повертати реакт елемент / компонент
-    return <h1>Some heading</h1>;
+    return <h1>Some heading class</h1>;
   }
 }
 
+// функціональний компонент
+function HeadingFunction() {
+  // має повертати реакт елемент / компонент
+  return <h1>Some heading func</h1>;
+}
+
 // відмальовування компоненту
-// const headerComponent = React.createElement(Heading);
-const headerComponent = <Heading />;
+// const headerComponent = React.createElement(HeadingClass);
+// const headerComponent = <HeadingClass />;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(headerComponent);
+root.render(<HeadingFunction />);
