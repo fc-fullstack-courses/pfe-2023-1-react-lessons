@@ -24,6 +24,19 @@ function HeadingFunction() {
   return <h1>Some heading func</h1>;
 }
 
+// створіть компонент який буде відмальовувати параграф тексту
+
+// class TextClassSolution extends React.Component {
+//   render() {
+    
+//     return <p>text class</p>;
+//   }
+// }
+
+// function TextFunctionSolution () {
+//   return <p>text func</p>;
+// }
+
 // відмальовування компоненту
 // const headerComponent = React.createElement(HeadingClass);
 // const headerComponent = <HeadingClass />;
