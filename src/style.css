@@ -1,0 +1,7 @@
+.header {
+  padding: 20px;
+  background: lightgray;
+  border: 2px solid black;
+  position: sticky;
+  top: 0;
+}

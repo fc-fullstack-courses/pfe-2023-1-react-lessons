@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './style.css';
 
 /*
   Компонентів існує 2 види
@@ -40,7 +41,7 @@ import './index.css';
 class Header extends React.Component {
   render() {
     return (
-      <header>
+      <header className='header'>
         <h1>Our site</h1>
         <NavList />
       </header>
