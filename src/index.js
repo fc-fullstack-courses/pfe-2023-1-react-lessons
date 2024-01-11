@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './App';
 import './index.css';
-import './style.css';
 
 /*
   Компонентів існує 2 види
@@ -38,44 +38,12 @@ import './style.css';
 //   return <p>text func</p>;
 // }
 
-class Header extends React.Component {
-  render() {
-    return (
-      <header className='header'>
-        <h1>Our site</h1>
-        <NavList />
-      </header>
-    );
-  }
-}
-
 /*
   реакт не показує булеві значення, null, undefined, Symbol, ""
   реакт кидається помилкою якщо малювати звичайний об'єкт
   якщо малювати масив то все залежить від вмісту массиву
   усе інше реакт малює нормально
 */
-
-function NavList() {
-  return (
-    <nav>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-      </ul>
-    </nav>
-  );
-}
-
-function MainContent() {
-  return (
-    <main>
-      <h2>Content heading</h2>
-      <p>Lorem sdsadsdsdsa</p>
-    </main>
-  );
-}
 
 // відмальовування компоненту
 // const headerComponent = React.createElement(HeadingClass);
@@ -86,9 +54,4 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // використовувати якщо треба порендирити декілька елементівв без видимого контейнеру
 // ! не передавати атрибути / пропси
 // <></> === <React.Fragment></React.Fragment> === React.createElement(React.Fragment)
-root.render(
-  <>
-    <Header />
-    <MainContent />
-  </>
-);
+root.render(<App />);
