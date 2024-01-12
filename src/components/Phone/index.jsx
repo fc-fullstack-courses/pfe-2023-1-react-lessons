@@ -7,22 +7,27 @@ class Phone extends React.Component {
     this.state = {
       phoneState: 'off',
     };
+
+    // прикрутили this
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick () {
+    alert('test');
+    this.state.phoneState = 'on';
+    console.log(this.state);
   }
 
   render() {
     const { color, price } = this.props;
     const { phoneState } = this.state;
 
-    function handleClick () {
-      alert('test');
-    }
-
     return (
       <div>
         <p>Phone is {color}</p>
         <p>Phone price is {price}</p>
         <p>Phone is currently {phoneState}</p>
-        <button onClick={handleClick}>Switch on</button>
+        <button onClick={this.handleClick}>Switch on</button>
       </div>
     );
   }
