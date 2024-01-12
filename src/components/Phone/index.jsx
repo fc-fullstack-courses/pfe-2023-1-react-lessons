@@ -48,8 +48,11 @@ class Phone extends React.Component {
     const phoneStatus =
       phoneState === 'on' ? <PhoneOnText /> : <PhoneOffText />;
 
+
+    const containerClass = `phoneContainer ${phoneState === 'on' ? 'on' : 'off'}`;
+
     return (
-      <div className="phoneContainer">
+      <div className={containerClass}>
         <p>Phone is {color}</p>
         <p>Phone price is {price}</p>
         {phoneStatus}
