@@ -1,4 +1,5 @@
 import React from 'react';
+import './style.css';
 
 class Phone extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Phone extends React.Component {
     const { phoneState } = this.state;
 
     return (
-      <div>
+      <div className='phoneContainer'>
         <p>Phone is {color}</p>
         <p>Phone price is {price}</p>
         <p>Phone is currently {phoneState}</p>

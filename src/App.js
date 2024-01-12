@@ -23,14 +23,8 @@ const user3 = {
 function App() {
   return (
     <>
-      <Header />
-      <MainContent />
-      <Greeting user={user1} />
-      <Greeting user={user2} />
-      <Greeting user={user3} />
-      <TextElement text="Long lorem ipsum text" tooltip="this is title" />
-      <TextElement text="Other text" tooltip="other title" />
       <Phone color="black" price={15999.99} />
+      <Phone color="white" price={9999.99} />
     </>
   );
 }
