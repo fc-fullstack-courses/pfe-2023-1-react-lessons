@@ -14,7 +14,17 @@ class Phone extends React.Component {
 
   handleClick () {
     alert('test');
-    this.state.phoneState = 'on';
+    // це імперативний код
+    // працює некорректно
+    // this.state.phoneState = 'on';
+
+    // setState - метод який приймає об'єкт і зливає його з поточним станом
+    // після чого реакт робить повторний рендер
+    const stateChanges = {
+      phoneState: 'on'
+    }
+    this.setState(stateChanges);
+
     console.log(this.state);
   }
 
