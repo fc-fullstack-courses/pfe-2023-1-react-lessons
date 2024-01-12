@@ -63,10 +63,10 @@ class Phone extends React.Component {
         <p>Phone price is {price}</p>
         {phoneStatus}
         <button onClick={this.handleToggle}>
-          Switch {isOn ? 'on' : 'off'}
+          Switch {isOn ? 'off' : 'on'}
         </button>
         <button onClick={isOn ? this.handleToggleOff : this.handleToggleOn}>
-          Switch {isOn ? 'on' : 'off'} v2
+          Switch {isOn ? 'off' : 'on'} v2
         </button>
       </div>
     );
