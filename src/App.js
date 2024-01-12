@@ -8,6 +8,7 @@ class App extends Component {
 
     this.state = {
       isPhoneShown: true,
+      isDirectSortOrder: true,
       phones: [
         {
           id: 0,
@@ -34,8 +35,30 @@ class App extends Component {
     });
   };
 
+  toggleSortOrder = () => {
+    /*
+      1. взяти масив зі стейту
+      2. перевернути його
+      3. оновити стан, не забути змінити змінну яка стежить за порядком масиву
+    */
+
+    // 1. взяти масив зі стейту
+    const { phones, isDirectSortOrder } = this.state;
+
+    // 2. перевернути його
+    // const phonesCopy = JSON.parse(JSON.stringify(phones));
+    const phonesCopy = structuredClone(phones);
+    phonesCopy.reverse();
+
+    // 3. оновити стан, не забути змінити змінну яка стежить за порядком масиву
+    this.setState({
+      isDirectSortOrder: !isDirectSortOrder,
+      phones: phonesCopy,
+    });
+  };
+
   render() {
-    const { isPhoneShown, phones } = this.state;
+    const { isPhoneShown, phones, isDirectSortOrder } = this.state;
 
     // const elems = (
     //   <>
@@ -44,7 +67,7 @@ class App extends Component {
     //   </>
     // );
 
-    // ви можете зробити мапом масиви реакт елементів / компонентів 
+    // ви можете зробити мапом масиви реакт елементів / компонентів
     // і відрендерити їх одразу
     const phonesComponents = phones.map((phone) => (
       <li>
@@ -55,6 +78,10 @@ class App extends Component {
     return (
       <>
         <button onClick={this.handleVisibility}>Toggle phone visibility</button>
+        <button onClick={this.toggleSortOrder}>Reverse sort order</button>
+        <p>
+          Current sort order is: {isDirectSortOrder ? 'direct' : 'reversed'}
+        </p>
         <ul>{phonesComponents}</ul>
         {/* {isPhoneShown ? <Phone color="black" price={15999.99} /> : null} */}
         {/* {isPhoneShown && (
