@@ -19,14 +19,38 @@ class App extends Component {
 
   render() {
     const { isPhoneShown } = this.state;
+
+    const elems = (
+      <>
+        <Phone color="black" price={15999.99} />
+        <button>sdsadsa</button>
+      </>
+    );
+
     return (
       <>
         <button onClick={this.handleVisibility}>Toggle phone visibility</button>
         {/* {isPhoneShown ? <Phone color="black" price={15999.99} /> : null} */}
-        {isPhoneShown && <Phone color="black" price={15999.99} />}
+        {isPhoneShown && (
+          <>
+            <Phone color="black" price={15999.99} />
+            <button>sdsadsa</button>
+          </>
+        )}
+        {isPhoneShown && elems}
+        {isPhoneShown && <OtherComponent />}
       </>
     );
   }
+}
+
+function OtherComponent() {
+  return (
+    <>
+      <Phone color="black" price={15999.99} />
+      <button>sdsadsa</button>
+    </>
+  );
 }
 
 export default App;
