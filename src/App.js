@@ -1,32 +1,32 @@
-import Header from './components/Header';
-import MainContent from './components/MainContent';
-import Greeting from './components/Greetings';
+import React, { Component } from 'react';
 import './App.css';
-import TextElement from './components/TextElement';
 import Phone from './components/Phone';
 
-const user1 = {
-  name: 'User',
-  lastName: 'Userenko',
-};
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-const user2 = {
-  name: 'Test',
-  lastName: 'Testovich',
-};
+    this.state = {
+      isPhoneShown: true,
+    };
+  }
 
-const user3 = {
-  name: 'John',
-  lastName: 'Doe',
-};
+  handleVisibility = () => {
+    this.setState({
+      isPhoneShown: !this.state.isPhoneShown,
+    });
+  };
 
-function App() {
-  return (
-    <>
-      <Phone color="black" price={15999.99} />
-      <Phone color="white" price={9999.99} />
-    </>
-  );
+  render() {
+    const { isPhoneShown } = this.state;
+    return (
+      <>
+        <button onClick={this.handleVisibility}>Toggle phone visibility</button>
+        {/* {isPhoneShown ? <Phone color="black" price={15999.99} /> : null} */}
+        {isPhoneShown && <Phone color="black" price={15999.99} />}
+      </>
+    );
+  }
 }
 
 export default App;
