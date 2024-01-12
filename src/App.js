@@ -8,6 +8,23 @@ class App extends Component {
 
     this.state = {
       isPhoneShown: true,
+      phones: [
+        {
+          id: 0,
+          color: 'black',
+          price: 15999.99,
+        },
+        {
+          id: 1,
+          color: 'white',
+          price: 9999.99,
+        },
+        {
+          id: 2,
+          color: 'gold',
+          price: 59999.99,
+        },
+      ],
     };
   }
 
@@ -18,27 +35,36 @@ class App extends Component {
   };
 
   render() {
-    const { isPhoneShown } = this.state;
+    const { isPhoneShown, phones } = this.state;
 
-    const elems = (
-      <>
-        <Phone color="black" price={15999.99} />
-        <button>sdsadsa</button>
-      </>
-    );
+    // const elems = (
+    //   <>
+    //     <Phone color="black" price={15999.99} />
+    //     <button>sdsadsa</button>
+    //   </>
+    // );
+
+    // ви можете зробити мапом масиви реакт елементів / компонентів 
+    // і відрендерити їх одразу
+    const phonesComponents = phones.map((phone) => (
+      <li>
+        <Phone color={phone.color} price={phone.price} />
+      </li>
+    ));
 
     return (
       <>
         <button onClick={this.handleVisibility}>Toggle phone visibility</button>
+        <ul>{phonesComponents}</ul>
         {/* {isPhoneShown ? <Phone color="black" price={15999.99} /> : null} */}
-        {isPhoneShown && (
+        {/* {isPhoneShown && (
           <>
             <Phone color="black" price={15999.99} />
             <button>sdsadsa</button>
           </>
-        )}
-        {isPhoneShown && elems}
-        {isPhoneShown && <OtherComponent />}
+        )} */}
+        {/* {isPhoneShown && elems} */}
+        {/* {isPhoneShown && <OtherComponent />} */}
       </>
     );
   }
