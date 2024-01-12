@@ -13,19 +13,23 @@ class Phone extends React.Component {
   }
 
   handleClick () {
-    alert('test');
-    // це імперативний код
-    // працює некорректно
-    // this.state.phoneState = 'on';
-
     // setState - метод який приймає об'єкт і зливає його з поточним станом
     // після чого реакт робить повторний рендер
     const stateChanges = {
       phoneState: 'on'
     }
     this.setState(stateChanges);
+    /*
+      доробити телефону кнопку вимикання, 
+      при якій його стан має змінитися на off
+    */
+  }
 
-    console.log(this.state);
+  // this береться автоматично
+  handleToggleOff = () => {
+    this.setState({
+      phoneState: 'off'
+    });
   }
 
   render() {
@@ -38,6 +42,7 @@ class Phone extends React.Component {
         <p>Phone price is {price}</p>
         <p>Phone is currently {phoneState}</p>
         <button onClick={this.handleClick}>Switch on</button>
+        <button onClick={this.handleToggleOff}>Switch off</button>
       </div>
     );
   }
