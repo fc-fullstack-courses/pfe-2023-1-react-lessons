@@ -10,10 +10,10 @@ class Phone extends React.Component {
     };
 
     // прикрутили this
-    this.handleClick = this.handleClick.bind(this);
+    this.handleToggleOn = this.handleToggleOn.bind(this);
   }
 
-  handleClick() {
+  handleToggleOn() {
     // setState - метод який приймає об'єкт і зливає його з поточним станом
     // після чого реакт робить повторний рендер
     const stateChanges = {
@@ -30,6 +30,14 @@ class Phone extends React.Component {
   handleToggleOff = () => {
     this.setState({
       isOn: false,
+    });
+  };
+
+  handleToggle = () => {
+    const { isOn } = this.state;
+    this.setState({
+      // isOn: !this.state.isOn
+      isOn: !isOn,
     });
   };
 
@@ -54,8 +62,12 @@ class Phone extends React.Component {
         <p>Phone is {color}</p>
         <p>Phone price is {price}</p>
         {phoneStatus}
-        <button onClick={this.handleClick}>Switch on</button>
-        <button onClick={this.handleToggleOff}>Switch off</button>
+        <button onClick={this.handleToggle}>
+          Switch {isOn ? 'on' : 'off'}
+        </button>
+        <button onClick={isOn ? this.handleToggleOff : this.handleToggleOn}>
+          Switch {isOn ? 'on' : 'off'} v2
+        </button>
       </div>
     );
   }
