@@ -6,7 +6,7 @@ class Phone extends React.Component {
     super(props);
     // стан існує тільки у класових компонентів
     this.state = {
-      phoneState: 'off',
+      isOn: false,
     };
 
     // прикрутили this
@@ -17,7 +17,7 @@ class Phone extends React.Component {
     // setState - метод який приймає об'єкт і зливає його з поточним станом
     // після чого реакт робить повторний рендер
     const stateChanges = {
-      phoneState: 'on',
+      isOn: true,
     };
     this.setState(stateChanges);
     /*
@@ -29,13 +29,13 @@ class Phone extends React.Component {
   // this береться автоматично
   handleToggleOff = () => {
     this.setState({
-      phoneState: 'off',
+      isOn: false,
     });
   };
 
   render() {
     const { color, price } = this.props;
-    const { phoneState } = this.state;
+    const { isOn } = this.state;
 
     // let phoneStatus;
 
@@ -45,11 +45,9 @@ class Phone extends React.Component {
     //   phoneStatus = <PhoneOffText/>;
     // }
 
-    const phoneStatus =
-      phoneState === 'on' ? <PhoneOnText /> : <PhoneOffText />;
+    const phoneStatus = isOn ? <PhoneOnText /> : <PhoneOffText />;
 
-
-    const containerClass = `phoneContainer ${phoneState === 'on' ? 'on' : 'off'}`;
+    const containerClass = `phoneContainer ${isOn ? 'on' : 'off'}`;
 
     return (
       <div className={containerClass}>
