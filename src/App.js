@@ -69,10 +69,16 @@ class App extends Component {
 
     // ви можете зробити мапом масиви реакт елементів / компонентів
     // і відрендерити їх одразу
+    // Верхньому елементу / компоненту який ви повертаєте з мапи
+    // НЕОБХІДНО вказати унікальний для цього списка службовий проп
+    // key
     const phonesComponents = phones.map((phone) => (
-      <li>
-        <Phone color={phone.color} price={phone.price} />
-      </li>
+      <Phone key={phone.id} color={phone.color} price={phone.price} />
+    ));
+
+    // тут вже можна такий самий набір ключів як і у phonesComponents
+    const phonesComponents2 = phones.map((phone) => (
+      <Phone key={phone.id} color={phone.color} price={phone.price} />
     ));
 
     return (
