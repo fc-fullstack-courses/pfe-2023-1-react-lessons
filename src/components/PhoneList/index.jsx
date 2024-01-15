@@ -12,16 +12,19 @@ class PhoneList extends React.Component {
           id: 0,
           color: 'black',
           price: 15999.99,
+          isFavorite: false,
         },
         {
           id: 1,
           color: 'white',
           price: 9999.99,
+          isFavorite: false,
         },
         {
           id: 2,
           color: 'gold',
           price: 59999.99,
+          isFavorite: false,
         },
       ],
     };
@@ -49,6 +52,34 @@ class PhoneList extends React.Component {
     });
   };
 
+  toggleFavorite = (id) => {
+    const { phones } = this.state;
+    /*
+      1. знайти телефон
+      2. змінити дані у потрідному телефоні
+      3. оновити стан
+    */
+
+    // 1. знайти телефон
+    //  через id
+    // 2. змінити дані у потрідному телефоні
+    const newPhones = phones.map(phone => {
+      if (id !== phone.id) {
+        return phone;
+      }
+
+      return {
+        ...phone,
+        isFavorite: !phone.isFavorite
+      }
+    });
+
+    // 3. оновити стан
+    this.setState({
+      phones: newPhones
+    });
+  };
+
   render() {
     const { phones, isDirectSortOrder } = this.state;
 
@@ -65,7 +96,11 @@ class PhoneList extends React.Component {
     // НЕОБХІДНО вказати унікальний для цього списка службовий проп
     // key
     const phonesComponents = phones.map((phone) => (
-      <Phone key={phone.id} color={phone.color} price={phone.price} />
+      <Phone
+        key={phone.id}
+        phone={phone}
+        toggleFavorite={this.toggleFavorite}
+      />
     ));
 
     // тут вже можна такий самий набір ключів як і у phonesComponents

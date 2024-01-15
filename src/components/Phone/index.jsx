@@ -42,16 +42,8 @@ class Phone extends React.Component {
   };
 
   render() {
-    const { color, price } = this.props;
+    const { phone: {color, price, isFavorite, id}, toggleFavorite } = this.props;
     const { isOn } = this.state;
-
-    // let phoneStatus;
-
-    // if(phoneState === 'on') {
-    //   phoneStatus = <PhoneOnText />;
-    // } else {
-    //   phoneStatus = <PhoneOffText/>;
-    // }
 
     const phoneStatus = isOn ? <PhoneOnText /> : <PhoneOffText />;
 
@@ -62,12 +54,14 @@ class Phone extends React.Component {
         <p>Phone is {color}</p>
         <p>Phone price is {price}</p>
         {phoneStatus}
+        {isFavorite && <p>Phone is favorite</p>}
         <button onClick={this.handleToggle}>
           Switch {isOn ? 'off' : 'on'}
         </button>
-        <button onClick={isOn ? this.handleToggleOff : this.handleToggleOn}>
+        {/* <button onClick={isOn ? this.handleToggleOff : this.handleToggleOn}>
           Switch {isOn ? 'off' : 'on'} v2
-        </button>
+        </button> */}
+        <button onClick={() => {toggleFavorite(id)}}>{isFavorite ? 'Remove from' : 'Make'} favorite</button>
       </div>
     );
   }

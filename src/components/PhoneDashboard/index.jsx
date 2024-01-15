@@ -1,5 +1,5 @@
 import React from 'react';
-import PhoneList from '../PhoneList/PhoneList';
+import PhoneList from '../PhoneList';
 
 class PhoneDashboard extends React.Component {
   constructor(props) {
