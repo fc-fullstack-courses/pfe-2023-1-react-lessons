@@ -1,5 +1,6 @@
 import React from 'react';
 import Phone from '../Phone';
+import PhoneCart from '../PhoneCart';
 
 class PhoneList extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class PhoneList extends React.Component {
           isFavorite: false,
         },
       ],
+      cart: [],
     };
   }
 
@@ -63,25 +65,46 @@ class PhoneList extends React.Component {
     // 1. знайти телефон
     //  через id
     // 2. змінити дані у потрідному телефоні
-    const newPhones = phones.map(phone => {
+    const newPhones = phones.map((phone) => {
       if (id !== phone.id) {
         return phone;
       }
 
       return {
         ...phone,
-        isFavorite: !phone.isFavorite
-      }
+        isFavorite: !phone.isFavorite,
+      };
     });
 
     // 3. оновити стан
     this.setState({
-      phones: newPhones
+      phones: newPhones,
+    });
+  };
+
+  addToCart = (id) => {
+    const { phones, cart } = this.state;
+    const phoneToAdd = phones.find((phone) => id === phone.id);
+    
+    const cartIndex = cart.findIndex((phone) => id === phone.id);
+
+    let newCart;
+
+    if(cartIndex === -1) {
+      newCart = [...cart, {...phoneToAdd, quantity: 1}];
+    } else {
+      newCart = [...cart];
+      newCart[cartIndex].quantity++;
+    }
+    
+
+    this.setState({
+      cart: newCart
     });
   };
 
   render() {
-    const { phones, isDirectSortOrder } = this.state;
+    const { phones, isDirectSortOrder, cart } = this.state;
 
     // const elems = (
     //   <>
@@ -100,13 +123,14 @@ class PhoneList extends React.Component {
         key={phone.id}
         phone={phone}
         toggleFavorite={this.toggleFavorite}
+        addToCart={this.addToCart}
       />
     ));
 
     // тут вже можна такий самий набір ключів як і у phonesComponents
-    const phonesComponents2 = phones.map((phone) => (
-      <Phone key={phone.id} color={phone.color} price={phone.price} />
-    ));
+    // const phonesComponents2 = phones.map((phone) => (
+    //   <Phone key={phone.id} color={phone.color} price={phone.price} />
+    // ));
 
     return (
       <>
@@ -115,6 +139,7 @@ class PhoneList extends React.Component {
           Current sort order is: {isDirectSortOrder ? 'direct' : 'reversed'}
         </p>
         <ul>{phonesComponents}</ul>
+        <PhoneCart cart={cart} />
       </>
     );
   }

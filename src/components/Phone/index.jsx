@@ -42,7 +42,11 @@ class Phone extends React.Component {
   };
 
   render() {
-    const { phone: {color, price, isFavorite, id}, toggleFavorite } = this.props;
+    const {
+      phone: { color, price, isFavorite, id },
+      toggleFavorite,
+      addToCart,
+    } = this.props;
     const { isOn } = this.state;
 
     const phoneStatus = isOn ? <PhoneOnText /> : <PhoneOffText />;
@@ -61,7 +65,14 @@ class Phone extends React.Component {
         {/* <button onClick={isOn ? this.handleToggleOff : this.handleToggleOn}>
           Switch {isOn ? 'off' : 'on'} v2
         </button> */}
-        <button onClick={() => {toggleFavorite(id)}}>{isFavorite ? 'Remove from' : 'Make'} favorite</button>
+        <button
+          onClick={() => {
+            toggleFavorite(id);
+          }}
+        >
+          {isFavorite ? 'Remove from' : 'Make'} favorite
+        </button>
+        <button onClick={() => addToCart(id)}>Add to cart</button>
       </div>
     );
   }
