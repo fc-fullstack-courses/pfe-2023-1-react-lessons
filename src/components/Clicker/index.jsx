@@ -18,11 +18,22 @@ class Clicker extends Component {
       clicks: clicks + 1,
     });
   };
+
+  start = () => {
+    if(!this.intervalId) {
+      this.intervalId = setInterval(this.handleClick, 1000);
+    }
+  }
+
+  stop = () => {
+    clearInterval(this.intervalId);
+    this.intervalId = null;
+  }
   
   // метод життевого циклу, запускається після першому рендері
   componentDidMount () {
     console.log('componentDidMount');
-    this.intervalId = setInterval(this.handleClick, 1000);
+    // this.start();
   }
 
   //  метод життевого циклу, запускається після 2+ рендеру
@@ -43,7 +54,7 @@ class Clicker extends Component {
   // побічних ефектів (наприклад інтервалів)
   componentWillUnmount () {
     console.log('componentWillUnmount');
-    clearInterval(this.intervalId);
+    this.stop();
   }
 
   render() {
@@ -58,6 +69,8 @@ class Clicker extends Component {
       <div>
         <p>Clicks: {clicks}</p>
         <button onClick={this.handleClick}>Add click</button>
+        <button onClick={this.start}>Start interval</button>
+        <button onClick={this.stop}>Stop interval</button>
       </div>
     );
   }
