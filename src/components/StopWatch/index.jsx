@@ -33,6 +33,14 @@ class StopWatch extends Component {
     });
   };
 
+  componentDidMount() {
+    this.start();
+  }
+
+  componentWillUnmount() {
+    this.stop();
+  }
+
   render() {
     const { date } = this.state;
 
