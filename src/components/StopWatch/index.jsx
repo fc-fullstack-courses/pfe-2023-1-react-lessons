@@ -57,3 +57,8 @@ class StopWatch extends Component {
 }
 
 export default StopWatch;
+
+/*
+  Зробити StopWatch з використанням setTimeout замість setInterval
+  
+*/
