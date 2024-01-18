@@ -1,24 +1,36 @@
 import React, { Component } from 'react';
 
+const initialValues = {
+  email: '',
+  password: '',
+  isRemebered: false,
+};
+
 class LoginForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
-      isRemebered: false,
+      ...initialValues,
     };
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
 
+    const { email, password } = this.state;
+
     // console.log(e.target.elements.email.value);
     // console.log(e.target.elements.password.value);
     // const {} = e;
 
+    console.log(email);
+    console.log(password);
+
     // e.target.reset();
+    this.setState({
+      ...initialValues,
+    });
   };
 
   // handleEmailChange = (e) => {
@@ -41,7 +53,7 @@ class LoginForm extends Component {
     const isCheckbox = type === 'checkbox';
 
     const newState = {
-      [name]: isCheckbox ? checked : value ,
+      [name]: isCheckbox ? checked : value,
     };
 
     this.setState(newState);
@@ -66,12 +78,13 @@ class LoginForm extends Component {
           onChange={this.handleChange}
         />
         <label>
-        <input
-          type="checkbox"
-          name="isRemebered"
-          checked={isRemebered}
-          onChange={this.handleChange}
-        /> Is remembered
+          <input
+            type="checkbox"
+            name="isRemebered"
+            checked={isRemebered}
+            onChange={this.handleChange}
+          />{' '}
+          Is remembered
         </label>
 
         <button type="submit">Login</button>
