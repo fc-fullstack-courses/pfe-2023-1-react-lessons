@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import './style.css';
 
 const initialValues = {
   email: '',
   password: '',
   isRemebered: false,
+  isEmailValid: true
 };
 
 class LoginForm extends Component {
@@ -56,17 +58,25 @@ class LoginForm extends Component {
       [name]: isCheckbox ? checked : value,
     };
 
+    if(name === 'email') {
+      newState.isEmailValid = !value.includes(' ');
+    }
+
     this.setState(newState);
   };
 
   render() {
-    const { email, password, isRemebered } = this.state;
+    const { email, password, isRemebered, isEmailValid } = this.state;
+
+    const emailClassNames = `input ${isEmailValid ? 'validInput' : 'invalidInput'}`;
+
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className='container'>
         <input
           type="email"
           name="email"
           placeholder="Email"
+          className={emailClassNames}
           value={email}
           onChange={this.handleChange}
         />
@@ -74,6 +84,7 @@ class LoginForm extends Component {
           type="password"
           name="password"
           placeholder="Password"
+          className='input'
           value={password}
           onChange={this.handleChange}
         />
