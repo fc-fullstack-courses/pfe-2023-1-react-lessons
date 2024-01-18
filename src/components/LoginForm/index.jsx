@@ -7,6 +7,7 @@ class LoginForm extends Component {
     this.state = {
       email: '',
       password: '',
+      isRemebered: false,
     };
   }
 
@@ -20,24 +21,34 @@ class LoginForm extends Component {
     // e.target.reset();
   };
 
-  handleEmailChange = (e) => {
-    console.log(e.target.value);
+  // handleEmailChange = (e) => {
+  //   console.log(e.target.value);
 
-    this.setState({
-      email: e.target.value,
-    });
-  };
+  //   this.setState({
+  //     email: e.target.value,
+  //   });
+  // };
 
   /*
     зробити керованим інпут з паролем
   */
 
-  handlePasswordChange = ({ target: { value } }) => {
-    this.setState({ password: value });
+  // handlePasswordChange = ({ target: { value } }) => {
+  //   this.setState({ password: value });
+  // };
+
+  handleChange = ({ target: { name, value, checked, type } }) => {
+    const isCheckbox = type === 'checkbox';
+
+    const newState = {
+      [name]: isCheckbox ? checked : value ,
+    };
+
+    this.setState(newState);
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, isRemebered } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <input
@@ -45,15 +56,24 @@ class LoginForm extends Component {
           name="email"
           placeholder="Email"
           value={email}
-          onChange={this.handleEmailChange}
+          onChange={this.handleChange}
         />
         <input
           type="password"
           name="password"
           placeholder="Password"
           value={password}
-          onChange={this.handlePasswordChange}
+          onChange={this.handleChange}
         />
+        <label>
+        <input
+          type="checkbox"
+          name="isRemebered"
+          checked={isRemebered}
+          onChange={this.handleChange}
+        /> Is remembered
+        </label>
+
         <button type="submit">Login</button>
       </form>
     );
