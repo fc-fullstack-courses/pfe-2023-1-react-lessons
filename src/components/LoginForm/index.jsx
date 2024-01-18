@@ -98,7 +98,7 @@ class LoginForm extends Component {
           Is remembered
         </label>
 
-        <button type="submit">Login</button>
+        <button className='btn' type="submit">Login</button>
       </form>
     );
   }

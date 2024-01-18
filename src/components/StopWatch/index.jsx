@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { format, addSeconds, add } from 'date-fns';
+import './style.css';
 
 // class StopWatch extends Component {
 //   constructor(props) {
@@ -119,10 +120,10 @@ class StopWatch extends Component {
     const timeText = format(time, 'HH:mm:ss');
 
     return (
-      <div>
-        <p>{timeText}</p>
-        <button onClick={this.start}>Start</button>
-        <button onClick={this.stop}>Stop</button>
+      <div className='container'>
+        <p className='timeDisplay'>{timeText}</p>
+        <button className='btn startBtn' onClick={this.start}>Start</button>
+        <button className='btn stopBtn' onClick={this.stop}>Stop</button>
       </div>
     );
   }
