@@ -6,7 +6,7 @@ class LoginForm extends Component {
 
     this.state = {
       email: '',
-      password: '12345admin',
+      password: '',
     };
   }
 
@@ -24,12 +24,20 @@ class LoginForm extends Component {
     console.log(e.target.value);
 
     this.setState({
-      email: e.target.value
+      email: e.target.value,
     });
   };
 
+  /*
+    зробити керованим інпут з паролем
+  */
+
+  handlePasswordChange = ({ target: { value } }) => {
+    this.setState({ password: value });
+  };
+
   render() {
-    const { email } = this.state;
+    const { email, password } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <input
@@ -39,7 +47,13 @@ class LoginForm extends Component {
           value={email}
           onChange={this.handleEmailChange}
         />
-        <input type="password" name="password" placeholder="Password" />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={password}
+          onChange={this.handlePasswordChange}
+        />
         <button type="submit">Login</button>
       </form>
     );
