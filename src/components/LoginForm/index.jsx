@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './style.css';
+import styles from './loginForm.module.css';
+
+console.log(styles);
 
 const initialValues = {
   email: '',
@@ -68,10 +70,10 @@ class LoginForm extends Component {
   render() {
     const { email, password, isRemebered, isEmailValid } = this.state;
 
-    const emailClassNames = `input ${isEmailValid ? 'validInput' : 'invalidInput'}`;
+    const emailClassNames = `${styles.input} ${isEmailValid ? styles.validInput : styles.invalidInput}`;
 
     return (
-      <form onSubmit={this.handleSubmit} className='container'>
+      <form onSubmit={this.handleSubmit} className={styles.container}>
         <input
           type="email"
           name="email"
@@ -84,7 +86,7 @@ class LoginForm extends Component {
           type="password"
           name="password"
           placeholder="Password"
-          className='input'
+          className={styles.input}
           value={password}
           onChange={this.handleChange}
         />
@@ -98,7 +100,7 @@ class LoginForm extends Component {
           Is remembered
         </label>
 
-        <button className='btn' type="submit">Login</button>
+        <button className={styles.btn} type="submit">Login</button>
       </form>
     );
   }
