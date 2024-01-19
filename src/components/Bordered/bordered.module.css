@@ -1,0 +1,13 @@
+.container {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.bigBorder {
+  border-width: 5px;
+}
+
+.redBorder {
+  border-color: red;
+}
