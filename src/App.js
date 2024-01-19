@@ -29,7 +29,7 @@ function App(props) {
         />
       </Bordered>
 
-      <Bordered>
+      <Bordered component={<List />}>
         <List>
           <li>One</li>
           <li>Two</li>
@@ -50,3 +50,19 @@ export default App;
     та відмалювати їх у діві, я у якого 
     задан бордер і паддінги
 */
+
+<Avatar src="sadsdsadsa"/>
+
+function Avatar ({src, alt}) {
+  return <img src={src} alt={alt}/>
+}
+
+<GuestAvatar />
+
+// function GuestAvatar ({ alt}) {
+//   return <img src={'gefaultPicsrc.jpg'} alt={alt}/>
+// }
+
+function GuestAvatar ({ alt}) {
+  return <Avatar src={'gefaultPicsrc.jpg'} alt={alt}/>
+}
