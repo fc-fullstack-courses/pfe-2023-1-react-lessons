@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './loginForm.module.css';
 
-console.log(styles);
+// console.log(styles);
 
 const initialValues = {
   email: '',
