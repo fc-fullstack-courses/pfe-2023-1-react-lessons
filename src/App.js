@@ -1,15 +1,11 @@
 import React from 'react';
 import './App.css';
-import LoginForm from './components/LoginForm';
-import StopWatch from './components/StopWatch';
-import List from './components/List';
-import Bordered from './components/Bordered';
-import DeepTree from './components/DeepTree';
+import UserLoader from './components/UserLoader';
 
 function App(props) {
   return (
     <>
-      <DeepTree />
+      <UserLoader />
     </>
   );
 }
