@@ -12,32 +12,28 @@ class UserLoader extends Component {
     };
   }
 
-  load = () => {
+  load = async () => {
     const { currentPage } = this.state;
     this.setState({
       isLoading: true,
     });
 
-    fetch(`https://randomuser.me/api/?results=20&seed=test&page=${currentPage}`)
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
+    try {
+      const res = await fetch(
+        `https://randomuser.me/api/?results=20&seed=test&page=${currentPage}`
+      );
 
-        this.setState({
-          users: data.results,
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          isError: true,
-        });
-      })
-      .finally(() => {
-        this.setState({
-          isLoading: false,
-        });
+      const { results } = await res.json();
+
+      this.setState({ users: results });
+    } catch (error) {
+      this.setState({ isError: true });
+    } finally {
+      this.setState({
+        isLoading: false,
       });
-  }
+    }
+  };
 
   componentDidMount() {
     this.load();
