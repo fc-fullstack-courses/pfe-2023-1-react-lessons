@@ -48,9 +48,14 @@ class UserLoader extends Component {
       return <h1>ERROR HAPPENED</h1>;
     }
 
-    const userCards = users.map((user) => (
-      <article>
-        <p>User</p>
+    const userCards = users.map(({ name: { first, last }, picture: {
+      thumbnail: src
+    }, login: {uuid} }) => (
+      <article key={uuid}>
+        <h2>
+          {first} {last}
+        </h2>
+        <img src={src} alt={`${first} ${last}`} />
       </article>
     ));
 
