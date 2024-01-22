@@ -11,6 +11,32 @@ class UserLoader extends Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({
+      isLoading: true,
+    });
+
+    fetch('https://randomuser.me/api/')
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+
+        this.setState({
+          users: data.results,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          isError: true,
+        });
+      })
+      .finally(() => {
+        this.setState({
+          isLoading: false,
+        });
+      });
+  }
+
   render() {
     const { users, isError, isLoading } = this.state;
 
