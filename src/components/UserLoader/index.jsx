@@ -12,7 +12,7 @@ class UserLoader extends Component {
     };
   }
 
-  componentDidMount() {
+  load = () => {
     const { currentPage } = this.state;
     this.setState({
       isLoading: true,
@@ -39,34 +39,13 @@ class UserLoader extends Component {
       });
   }
 
+  componentDidMount() {
+    this.load();
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentPage !== this.state.currentPage) {
-      const { currentPage } = this.state;
-      this.setState({
-        isLoading: true,
-      });
-
-      fetch(
-        `https://randomuser.me/api/?results=20&seed=test&page=${currentPage}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-
-          this.setState({
-            users: data.results,
-          });
-        })
-        .catch((err) => {
-          this.setState({
-            isError: true,
-          });
-        })
-        .finally(() => {
-          this.setState({
-            isLoading: false,
-          });
-        });
+      this.load();
     }
   }
 
