@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { getUsers } from '../../api';
 class UserLoader extends Component {
   constructor(props) {
     super(props);
@@ -19,11 +19,7 @@ class UserLoader extends Component {
     });
 
     try {
-      const res = await fetch(
-        `https://randomuser.me/api/?results=20&seed=test&page=${currentPage}`
-      );
-
-      const { results } = await res.json();
+      const results = await getUsers(currentPage);
 
       this.setState({ users: results });
     } catch (error) {
