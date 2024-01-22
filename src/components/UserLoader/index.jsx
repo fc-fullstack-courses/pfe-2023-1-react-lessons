@@ -45,20 +45,18 @@ class UserLoader extends Component {
     }
   }
 
-  handleNextPage = () => {
+  handleChangePage = (isNext) => {
     const { currentPage } = this.state;
 
-    this.setState({
-      currentPage: currentPage + 1,
-    });
-  };
-
-  handlePrevPage = () => {
-    const { currentPage } = this.state;
-
-    this.setState({
-      currentPage: currentPage > 1 ? currentPage - 1 : 1,
-    });
+    if (isNext) {
+      this.setState({
+        currentPage: currentPage + 1,
+      });
+    } else {
+      this.setState({
+        currentPage: currentPage > 1 ? currentPage - 1 : 1,
+      });
+    }
   };
 
   render() {
@@ -90,8 +88,8 @@ class UserLoader extends Component {
     return (
       <div>
         <div>
-          <button onClick={this.handlePrevPage}>Prev</button>
-          <button onClick={this.handleNextPage}>Next</button>
+          <button onClick={() => this.handleChangePage(false)}>Prev</button>
+          <button onClick={() => this.handleChangePage(true)}>Next</button>
         </div>
         {userCards}
       </div>
