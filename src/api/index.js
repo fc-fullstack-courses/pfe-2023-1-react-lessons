@@ -26,3 +26,10 @@ export async function getUsers(options = {}) {
 
   return users;
 }
+
+export async function getPosts () {
+  const res = await fetch('/posts.json');
+
+  return res.json();
+}
+

@@ -1,12 +1,40 @@
 import React from 'react';
 import './App.css';
-import UserLoader from './components/UserLoader';
-import BlogLoader from './components/BlogLoader';
+import DataLoader from './components/DataLoader';
+import { getPosts, getUsers } from './api';
 
 function App(props) {
+
+  const renderPosts = (state) => {
+    const {data: posts, isLoading, isError} = state;
+
+    const postList = posts.map((post) => (
+      <article key={post.id}>
+        <h2>{post.title}</h2>
+        <p>{post.text}</p>
+        <button>Learn more</button>
+      </article>
+    ));
+
+
+    return (
+      <section>
+        <h2>Posts</h2>
+        {isLoading && <h3>LOADING ...</h3>}
+        {isError && <h3>ERROR</h3>}
+        {postList}
+      </section>
+    );
+  };
+
   return (
     <>
-      <BlogLoader />
+      <DataLoader loadData={getPosts} render={renderPosts} />
+      <DataLoader loadData={() => getUsers({ page: 1 })} render={() => {}} />
+      <DataLoader
+        loadData={() => fetch('/manifest.json').then((res) => res.json())}
+        render={() => {}}
+      />
       {/* <UserLoader /> */}
     </>
   );
