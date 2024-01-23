@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import DataLoader from './components/DataLoader';
 import { getPosts, getUsers } from './api';
+import UserList from './components/UserList';
 
 function App(props) {
 
@@ -27,13 +28,18 @@ function App(props) {
     );
   };
 
+  const renderUsers = (state) => {
+    const {data: users, isLoading, isError} = state;
+    return <UserList users={users} isError={isError} isLoading={isLoading}/>
+  }
+
   return (
     <>
       <DataLoader loadData={getPosts} render={renderPosts} />
-      <DataLoader loadData={() => getUsers({ page: 1 })} render={() => {}} />
+      <DataLoader loadData={() => getUsers({ page: 1 })} render={renderUsers} />
       <DataLoader
         loadData={() => fetch('/manifest.json').then((res) => res.json())}
-        render={() => {}}
+        render={() => <p>this is render prop</p>}
       />
       {/* <UserLoader /> */}
     </>
