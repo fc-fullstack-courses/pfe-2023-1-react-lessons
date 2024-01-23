@@ -42,9 +42,9 @@ class DataLoader extends Component {
   }
 
   render() {
-    const { render } = this.props;
+    const { children } = this.props;
 
-    const layout = render(this.state);
+    const layout = children(this.state);
 
     return layout;
   }

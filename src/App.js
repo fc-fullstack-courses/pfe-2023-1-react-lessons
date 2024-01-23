@@ -35,12 +35,12 @@ function App(props) {
 
   return (
     <>
-      <DataLoader loadData={getPosts} render={renderPosts} />
-      <DataLoader loadData={() => getUsers({ page: 1 })} render={renderUsers} />
+      <DataLoader loadData={getPosts}>{renderPosts}</DataLoader>
+      {/* <DataLoader loadData={() => getUsers({ page: 1 })} abc={renderUsers} />
       <DataLoader
         loadData={() => fetch('/manifest.json').then((res) => res.json())}
-        render={() => <p>this is render prop</p>}
-      />
+        abc={() => <p>this is render prop</p>}
+      /> */}
       {/* <UserLoader /> */}
     </>
   );
@@ -49,11 +49,10 @@ function App(props) {
 export default App;
 
 /*
-  Створити компонент Bordered
-    задача компонента - прийняти якісь інші 
-    компоненти / елементи як children
-    та відмалювати їх у діві, я у якого 
-    задан бордер і паддінги
+  повторне використання логіки в реакті:
+    1. рендер пропси (якийсь проп-функція яка повертає JSX у компонента, зазвичай render)
+    2. Компоненти Вищого Порядку (HOC - High Order Components, назви розпочинаються з with)
+    3. Хуки ( назви розпочинаються з use)
 */
 
 <Avatar src="sadsdsadsa" />;
