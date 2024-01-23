@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
 import UserLoader from './components/UserLoader';
+import BlogLoader from './components/BlogLoader';
 
 function App(props) {
   return (
     <>
-      <UserLoader />
+      <BlogLoader />
+      {/* <UserLoader /> */}
     </>
   );
 }
@@ -20,18 +22,18 @@ export default App;
     задан бордер і паддінги
 */
 
-<Avatar src="sadsdsadsa"/>
+<Avatar src="sadsdsadsa" />;
 
-function Avatar ({src, alt}) {
-  return <img src={src} alt={alt}/>
+function Avatar({ src, alt }) {
+  return <img src={src} alt={alt} />;
 }
 
-<GuestAvatar />
+<GuestAvatar />;
 
 // function GuestAvatar ({ alt}) {
 //   return <img src={'gefaultPicsrc.jpg'} alt={alt}/>
 // }
 
-function GuestAvatar ({ alt}) {
-  return <Avatar src={'gefaultPicsrc.jpg'} alt={alt}/>
+function GuestAvatar({ alt }) {
+  return <Avatar src={'gefaultPicsrc.jpg'} alt={alt} />;
 }
