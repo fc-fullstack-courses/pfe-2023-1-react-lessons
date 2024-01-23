@@ -46,6 +46,13 @@ function App(props) {
   );
 }
 
+/*
+  За допомогою компоненту DataLoader завантажити та відобразити дані
+  які розташовані за адресою https://jsonplaceholder.typicode.com/todos
+
+  * DataLoader треба буде написати самому
+*/
+
 export default App;
 
 /*
