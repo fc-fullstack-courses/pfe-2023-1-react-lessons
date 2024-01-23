@@ -19,7 +19,7 @@ class UserLoader extends Component {
     });
 
     try {
-      const results = await getUsers(currentPage);
+      const results = await getUsers({ page: currentPage });
 
       this.setState({ users: results });
     } catch (error) {
