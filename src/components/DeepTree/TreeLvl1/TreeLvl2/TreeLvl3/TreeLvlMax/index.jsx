@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserContext } from '../../../../../../App';
+import { UserContext } from '../../../../../../contexts';
 
 const TreeLvlMax = ({ data, style, ...rest }) => {
   /*

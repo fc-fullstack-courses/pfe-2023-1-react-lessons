@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import DeepTree from './components/DeepTree';
+import { UserContext } from './contexts';
 
 /*
   Використання контексту:
@@ -9,8 +10,6 @@ import DeepTree from './components/DeepTree';
     3. Отримати дані у потрібному вам компоненті
 */
 
-const UserContext =  React.createContext();
-console.log(UserContext);
 class App extends React.Component {
   constructor(props) {
     super(props);
