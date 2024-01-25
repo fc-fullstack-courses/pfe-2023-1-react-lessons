@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
 import DeepTree from './components/DeepTree';
-import { UserContext } from './contexts';
+import { ThemeContext, UserContext } from './contexts';
+import Header from './components/Header';
+import MainContent from './components/MainContent';
 
 /*
   Використання контексту:
@@ -21,17 +23,20 @@ class App extends React.Component {
         lastName: 'Test',
         imgSrc: 'pic.jpg',
       },
+      theme: 'light',
     };
   }
 
   render() {
-    const { user } = this.state;
-
+    const { user, theme } = this.state;
 
     // Всі діти провайдера можуть отримати доступ до того, що лежить у контексті (його проп value)
     return (
       <UserContext.Provider value={user}>
-        <DeepTree />
+        <ThemeContext.Provider value={theme}>
+          <Header />
+          <MainContent />
+        </ThemeContext.Provider>
       </UserContext.Provider>
     );
   }
