@@ -35,13 +35,27 @@ function Header({ user, theme, setTheme }) {
   );
 }
 
-function HeaderWithUser(props) {
-  return (
-    <UserContext.Consumer>
-      {(user) => <Header user={user} {...props} />}
+// function HeaderWithUser(props) {
+//   return (
+//     <UserContext.Consumer>
+//       {(user) => <Header user={user} {...props} />}
+//     </UserContext.Consumer>
+//   );
+// }
+
+// Компонент Вищого Порядку (High Order Component HOC)
+function withUser (Component) {
+
+  function ComponentWithUser (props) {
+    return <UserContext.Consumer>
+      {(user) => <Component user={user} {...props} />}
     </UserContext.Consumer>
-  );
+  }
+
+  return ComponentWithUser;
 }
+
+const HeaderWithUser = withUser(Header);
 
 function HeaderWithUserAndTheme(props) {
   return (
