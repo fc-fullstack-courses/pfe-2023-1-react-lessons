@@ -5,9 +5,8 @@ import { getPosts, getUsers } from './api';
 import UserList from './components/UserList';
 
 function App(props) {
-
   const renderPosts = (state) => {
-    const {data: posts, isLoading, isError} = state;
+    const { data: posts, isLoading, isError } = state;
 
     const postList = posts.map((post) => (
       <article key={post.id}>
@@ -16,7 +15,6 @@ function App(props) {
         <button>Learn more</button>
       </article>
     ));
-
 
     return (
       <section>
@@ -29,13 +27,45 @@ function App(props) {
   };
 
   const renderUsers = (state) => {
-    const {data: users, isLoading, isError} = state;
-    return <UserList users={users} isError={isError} isLoading={isLoading}/>
+    const { data: users, isLoading, isError } = state;
+    return <UserList users={users} isError={isError} isLoading={isLoading} />;
+  };
+
+  function loadTodos() {
+    return fetch(`https://jsonplaceholder.typicode.com/todos`).then((res) =>
+      res.json()
+    );
   }
+
+  const renderTodos = (state) => {
+    const { data, isLoading, isError } = state;
+    if (isLoading) {
+      return <h2>LOADING ...</h2>;
+    }
+
+    if (isError) {
+      return <h2>ERROR!!!</h2>;
+    }
+
+    const todos = data.map((todo) => (
+      <section key={todo.id}>
+        <h3>{todo.title}</h3>
+        <input type="checkbox" checked={todo.completed} />
+      </section>
+    ));
+
+    return (
+      <section>
+        <h2>TODO LIST</h2>
+        {todos}
+      </section>
+    );
+  };
 
   return (
     <>
       <DataLoader loadData={getPosts}>{renderPosts}</DataLoader>
+      <DataLoader loadData={loadTodos}>{renderTodos}</DataLoader>
       {/* <DataLoader loadData={() => getUsers({ page: 1 })} abc={renderUsers} />
       <DataLoader
         loadData={() => fetch('/manifest.json').then((res) => res.json())}
