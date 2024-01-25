@@ -2,15 +2,16 @@ import React from 'react';
 import NavList from '../NavList';
 import { ThemeContext } from '../../contexts';
 import styles from './Header.module.css';
-
+import CONSTANTS from '../../constants';
+const { THEMES } = CONSTANTS;
 class Header extends React.Component {
   render() {
     const renderHeader = ([theme, setTheme]) => {
       let currentTheme;
 
-      if (theme === 'light') {
+      if (theme === THEMES.LIGHT) {
         currentTheme = styles.lightTheme;
-      } else if (theme === 'dark') {
+      } else if (theme === THEMES.DARK) {
         currentTheme = styles.darkTheme;
       }
 
@@ -21,11 +22,14 @@ class Header extends React.Component {
           <h1>Our site</h1>
           <NavList />
           <p>Theme is {theme}</p>
-          <select value={theme} onChange={(e) => {
-            setTheme(e.target.value);
-          }}>
-            <option value="light">Light theme</option>
-            <option value="dark">DarkTheme</option>
+          <select
+            value={theme}
+            onChange={(e) => {
+              setTheme(e.target.value);
+            }}
+          >
+            <option value={THEMES.LIGHT}>Light theme</option>
+            <option value={THEMES.DARK}>DarkTheme</option>
           </select>
         </header>
       );

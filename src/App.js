@@ -4,6 +4,7 @@ import DeepTree from './components/DeepTree';
 import { ThemeContext, UserContext } from './contexts';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
+import CONSTANTS from './constants';
 
 /*
   Використання контексту:
@@ -23,7 +24,7 @@ class App extends React.Component {
         lastName: 'Test',
         imgSrc: 'pic.jpg',
       },
-      theme: 'light',
+      theme: CONSTANTS.THEMES.LIGHT,
     };
   }
 
