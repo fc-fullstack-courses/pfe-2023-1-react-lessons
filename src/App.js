@@ -27,13 +27,19 @@ class App extends React.Component {
     };
   }
 
+  changeTheme = (newTheme) => {
+    this.setState({
+      theme: newTheme
+    })
+  }
+
   render() {
     const { user, theme } = this.state;
 
     // Всі діти провайдера можуть отримати доступ до того, що лежить у контексті (його проп value)
     return (
       <UserContext.Provider value={user}>
-        <ThemeContext.Provider value={theme}>
+        <ThemeContext.Provider value={[theme, this.changeTheme]}>
           <Header />
           <MainContent />
         </ThemeContext.Provider>
