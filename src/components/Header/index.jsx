@@ -5,46 +5,54 @@ import styles from './Header.module.css';
 import CONSTANTS from '../../constants';
 const { THEMES } = CONSTANTS;
 
-class Header extends React.Component {
-  render() {
-    return (
-      <UserContext.Consumer>
-        {(user) => (
-          <ThemeContext.Consumer>
-            {([theme, setTheme]) => {
-              let currentTheme;
+function Header({ user, theme, setTheme }) {
+  let currentTheme;
 
-              if (theme === THEMES.LIGHT) {
-                currentTheme = styles.lightTheme;
-              } else if (theme === THEMES.DARK) {
-                currentTheme = styles.darkTheme;
-              }
-
-              const classes = `${styles.header} ${currentTheme}`;
-
-              return (
-                <header className={classes}>
-                  <h1>Our site</h1>
-                  <h2>
-                    Hello {user.firstName} {user.lastName}
-                  </h2>
-                  <select
-                    value={theme}
-                    onChange={(e) => {
-                      setTheme(e.target.value);
-                    }}
-                  >
-                    <option value={THEMES.LIGHT}>Light theme</option>
-                    <option value={THEMES.DARK}>DarkTheme</option>
-                  </select>
-                </header>
-              );
-            }}
-          </ThemeContext.Consumer>
-        )}
-      </UserContext.Consumer>
-    );
+  if (theme === THEMES.LIGHT) {
+    currentTheme = styles.lightTheme;
+  } else if (theme === THEMES.DARK) {
+    currentTheme = styles.darkTheme;
   }
+
+  const classes = `${styles.header} ${currentTheme}`;
+
+  return (
+    <header className={classes}>
+      <h1>Our site</h1>
+      <h2>
+        Hello {user.firstName} {user.lastName}
+      </h2>
+      <select
+        value={theme}
+        onChange={(e) => {
+          setTheme(e.target.value);
+        }}
+      >
+        <option value={THEMES.LIGHT}>Light theme</option>
+        <option value={THEMES.DARK}>DarkTheme</option>
+      </select>
+    </header>
+  );
 }
 
-export default Header;
+function HeaderWithUser(props) {
+  return (
+    <UserContext.Consumer>
+      {(user) => <Header user={user} {...props} />}
+    </UserContext.Consumer>
+  );
+}
+
+function HeaderWithUserAndTheme(props) {
+  return (
+    <ThemeContext.Consumer>
+      {([theme, setTheme]) => (
+        <HeaderWithUser theme={theme} setTheme={setTheme} {...props} />
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+
+
+
+export default HeaderWithUserAndTheme;

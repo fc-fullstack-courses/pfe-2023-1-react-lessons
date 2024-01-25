@@ -41,7 +41,7 @@ class App extends React.Component {
     return (
       <UserContext.Provider value={user}>
         <ThemeContext.Provider value={[theme, this.changeTheme]}>
-          <Header />
+          <Header test={12345}/>
           <MainContent />
         </ThemeContext.Provider>
       </UserContext.Provider>
