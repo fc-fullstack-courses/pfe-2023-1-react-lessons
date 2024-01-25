@@ -1,22 +1,46 @@
 import React from 'react';
 import './App.css';
-import DataLoader from './components/DataLoader';
-import { getPosts, getUsers } from './api';
-import UserList from './components/UserList';
+import DeepTree from './components/DeepTree';
 
+/*
+  Використання контексту:
+    1. Створити контекст (React.createContext())
+    2. Передача даних контексту
+    3. Отримати дані у потрібному вам компоненті
+*/
+
+const UserContext =  React.createContext();
+console.log(UserContext);
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      
+      user: {
+        id: 1233443,
+        firstName: 'User',
+        lastName: 'Test',
+        imgSrc: 'pic.jpg',
+      },
     };
   }
 
-  render() {}
+  render() {
+    const { user } = this.state;
+
+
+    // Всі діти провайдера можуть отримати доступ до того, що лежить у контексті (його проп value)
+    return (
+      <UserContext.Provider value={user}>
+        <DeepTree />
+      </UserContext.Provider>
+    );
+  }
 }
 
 export default App;
+
+export { UserContext };
 
 /*
   повторне використання логіки в реакті:

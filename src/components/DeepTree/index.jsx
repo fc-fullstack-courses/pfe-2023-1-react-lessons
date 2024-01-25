@@ -15,6 +15,8 @@ class DeepTree extends Component {
   };
 
   render() {
+    const { user } = this.props;
+
     return (
       <div
         style={{
@@ -27,6 +29,7 @@ class DeepTree extends Component {
           data={this.state.data}
           handleClick={this.handleUniverseDestruction}
           style={{ color: 'red' }}
+          user={user}
           children={<p>Magic</p>}
         />
       </div>
