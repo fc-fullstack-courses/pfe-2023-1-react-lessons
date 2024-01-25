@@ -37,6 +37,20 @@ class App extends React.Component {
   }
 }
 
+/*
+  У компоненті App у стейті зберігати стрінгу, яка описує поточну тему вашого сайту 
+  (денна, нічна...)
+  Створити (якщо таких ще намає) компоненти Header, MainContent і Sidebar
+  Структура має бути такою:
+
+  App
+    Header
+    MainContent
+      Sidebar
+
+  У компонентах Header і Sidebar отримати значення теми сайту, не використовуючи пропси
+*/
+
 export default App;
 
 export { UserContext };
