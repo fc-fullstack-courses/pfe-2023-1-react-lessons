@@ -1,0 +1,20 @@
+// @import '../../common/styles/templates';
+
+@use '../../common/styles/templates';
+
+.header {
+  padding: 20px;
+  border: 2px solid black;
+  position: sticky;
+  top: 0;
+
+}
+
+.lightTheme {
+  @extend %lightTheme;
+}
+
+
+.darkTheme {
+  @extend %darkTheme;
+}

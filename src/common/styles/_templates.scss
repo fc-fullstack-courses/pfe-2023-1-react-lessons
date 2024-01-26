@@ -1,0 +1,12 @@
+@use './variables';
+
+%lightTheme {
+  background: variables.$lightColor;
+  color: variables.$darkColor;
+}
+
+
+%darkTheme {
+  color: variables.$lightColor;
+  background-color: variables.$darkColor;
+}

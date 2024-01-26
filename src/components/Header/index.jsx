@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 import CONSTANTS from '../../constants';
 import { withUser, withTheme } from '../../hocs';
 const { THEMES } = CONSTANTS;
