@@ -44,15 +44,20 @@ function Header({ user, theme, setTheme }) {
 // }
 
 // Компонент Вищого Порядку (High Order Component HOC)
-function withUser (Component) {
-
-  function ComponentWithUser (props) {
-    return <UserContext.Consumer>
-      {(user) => <Component user={user} {...props} />}
-    </UserContext.Consumer>
+/*
+  функція, яка приймає компонентА і повертає інший компонентБ,
+  який відмальовує компонентА
+*/
+function withUser(Component) {
+  class NewComponent extends React.Component {
+    render() {
+      return <UserContext.Consumer>
+        {(user) => <Component user={user} {...this.props} />}
+      </UserContext.Consumer>;
+    }
   }
 
-  return ComponentWithUser;
+  return NewComponent;
 }
 
 const HeaderWithUser = withUser(Header);
@@ -66,7 +71,5 @@ function HeaderWithUserAndTheme(props) {
     </ThemeContext.Consumer>
   );
 }
-
-
 
 export default HeaderWithUserAndTheme;
