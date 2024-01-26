@@ -1,8 +1,7 @@
 import React from 'react';
-import NavList from '../NavList';
-import { ThemeContext, UserContext } from '../../contexts';
 import styles from './Header.module.css';
 import CONSTANTS from '../../constants';
+import { withUser, withTheme } from '../../hocs';
 const { THEMES } = CONSTANTS;
 
 function Header({ user, theme, setTheme }) {
@@ -35,41 +34,12 @@ function Header({ user, theme, setTheme }) {
   );
 }
 
-// function HeaderWithUser(props) {
-//   return (
-//     <UserContext.Consumer>
-//       {(user) => <Header user={user} {...props} />}
-//     </UserContext.Consumer>
-//   );
-// }
+// const HeaderWithUser = withUser(Header);
 
-// Компонент Вищого Порядку (High Order Component HOC)
-/*
-  функція, яка приймає компонентА і повертає інший компонентБ,
-  який відмальовує компонентА
-*/
-function withUser(Component) {
-  class NewComponent extends React.Component {
-    render() {
-      return <UserContext.Consumer>
-        {(user) => <Component user={user} {...this.props} />}
-      </UserContext.Consumer>;
-    }
-  }
+// const HeaderWithUserAndTheme = withTheme(HeaderWithUser);
 
-  return NewComponent;
-}
+// const HeaderWithUserAndTheme = withTheme(withUser(Header));
 
-const HeaderWithUser = withUser(Header);
+// export default HeaderWithUserAndTheme;
 
-function HeaderWithUserAndTheme(props) {
-  return (
-    <ThemeContext.Consumer>
-      {([theme, setTheme]) => (
-        <HeaderWithUser theme={theme} setTheme={setTheme} {...props} />
-      )}
-    </ThemeContext.Consumer>
-  );
-}
-
-export default HeaderWithUserAndTheme;
+export default withTheme(withUser(Header));
