@@ -1,54 +1,63 @@
 import React from 'react';
 import './App.css';
-import DeepTree from './components/DeepTree';
-import { ThemeContext, UserContext } from './contexts';
-import Header from './components/Header';
-import MainContent from './components/MainContent';
-import CONSTANTS from './constants';
-
-/*
-  Використання контексту:
-    1. Створити контекст (React.createContext())
-    2. Передача даних контексту
-    3. Отримати дані у потрібному вам компоненті
-*/
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      user: {
-        id: 1233443,
-        firstName: 'User',
-        lastName: 'Test',
-        imgSrc: 'pic.jpg',
-      },
-      theme: CONSTANTS.THEMES.LIGHT,
-    };
-  }
-
-  changeTheme = (newTheme) => {
-    this.setState({
-      theme: newTheme
-    })
+    this.state = {};
   }
 
   render() {
-    const { user, theme } = this.state;
-
-    // Всі діти провайдера можуть отримати доступ до того, що лежить у контексті (його проп value)
     return (
-      <UserContext.Provider value={user}>
-        <ThemeContext.Provider value={[theme, this.changeTheme]}>
-          <Header test={12345}/>
-          <MainContent />
-        </ThemeContext.Provider>
-      </UserContext.Provider>
+      <BrowserRouter>
+        {/* завжди малюється */}
+        <h1>not header</h1>
+        {/* малювати за умовою, пов'язаною з урлою */}
+        <Switch>
+          {/* конкрентний маршрут, світч відмальовую перший маршрут який задовільняє урлі */}
+          {/* в урлі частина pathname має хбігатися зі пропом path */}
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+
+          <Route path="/contacts">
+            <ContactsPage />
+          </Route>
+
+          <Route path="/about">
+            <AboutUsPage />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
 
+function HomePage() {
+  return (
+    <div>
+      <h2>Home page</h2>
+    </div>
+  );
+}
+
+function ContactsPage() {
+  return (
+    <div>
+      <h2>Contacts page</h2>
+    </div>
+  );
+}
+
+function AboutUsPage() {
+  return (
+    <div>
+      <h2>About us page</h2>
+    </div>
+  );
+}
 /*
   У компоненті App у стейті зберігати стрінгу, яка описує поточну тему вашого сайту 
   (денна, нічна...)
@@ -71,8 +80,6 @@ class App extends React.Component {
 */
 
 export default App;
-
-export { UserContext };
 
 /*
   повторне використання логіки в реакті:
