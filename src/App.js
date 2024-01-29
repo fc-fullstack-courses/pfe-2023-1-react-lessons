@@ -17,9 +17,16 @@ class App extends React.Component {
           <h1>Site</h1>
           <nav>
             <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/contacts">Contacts</Link></li>
-              <li><Link to="/about">About us</Link></li>
+              {/* Використовуємо Link замість а  з пропом to замість href */}
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/contacts">Contacts</Link>
+              </li>
+              <li>
+                <Link to="/about">About us</Link>
+              </li>
             </ul>
           </nav>
         </header>
