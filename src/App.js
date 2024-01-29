@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +13,16 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         {/* завжди малюється */}
-        <h1>not header</h1>
+        <header>
+          <h1>Site</h1>
+          <nav>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/contacts">Contacts</Link></li>
+              <li><Link to="/about">About us</Link></li>
+            </ul>
+          </nav>
+        </header>
         {/* малювати за умовою, пов'язаною з урлою */}
         <Switch>
           {/* конкрентний маршрут, світч відмальовую перший маршрут який задовільняє урлі */}
