@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 // import { object, number, string, date, mixed, array } from 'yup';
-import * as yup from 'yup';
+import { loginSchema } from '../../utils/validationSchemas';
 import styles from './loginForm.module.css';
-
-const loginSchema = yup.object({
-  email: yup.string().required().email(),
-  password: yup.string().required().min(8).max(16),
-  code: yup.number(),
-});
 
 const initialValues = {
   email: '',
