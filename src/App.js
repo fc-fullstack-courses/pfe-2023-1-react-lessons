@@ -35,23 +35,26 @@ class App extends React.Component {
           {/* конкрентний маршрут, світч відмальовую перший маршрут який задовільняє урлі */}
           {/* в урлі частина pathname має хбігатися зі пропом path */}
           <Route exact path="/">
-            <HomePage />
+            {(routeProps) => <HomePage {...routeProps} />}
           </Route>
 
-          <Route path="/contacts">
-            <ContactsPage />
-          </Route>
+          <Route path="/contacts" render={(routeProps) => <ContactsPage {...routeProps} />} />
 
-          <Route path="/about">
-            <AboutUsPage />
-          </Route>
+          <Route path="/about" component={AboutUsPage} />
+
+          <Route path="/profile/:id" component={ProfilePage}/>
+
         </Switch>
       </BrowserRouter>
     );
   }
 }
 
-function HomePage() {
+function HomePage(props) {
+  console.log(props);
+
+  // setTimeout(() => {props.history.push('/about')},5000);
+
   return (
     <div>
       <h2>Home page</h2>
@@ -59,18 +62,30 @@ function HomePage() {
   );
 }
 
-function ContactsPage() {
+function ContactsPage(props) {
+  console.log(props);
   return (
     <div>
+      {props.location.pathname === '/contacts' && <p>You are on contacts page</p>}
       <h2>Contacts page</h2>
     </div>
   );
 }
 
-function AboutUsPage() {
+function AboutUsPage(props) {
+  console.log(props.match);
   return (
     <div>
       <h2>About us page</h2>
+    </div>
+  );
+}
+
+function ProfilePage(props) {
+  console.log(props.match);
+  return (
+    <div>
+      <h2>Profile {props.match.params.id} page</h2>
     </div>
   );
 }
