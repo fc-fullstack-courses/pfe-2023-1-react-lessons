@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+// import { object, number, string, date, mixed, array } from 'yup';
+import * as yup from 'yup';
 import styles from './loginForm.module.css';
+
+const loginSchema = yup.object({
+  email: yup.string().required().email(),
+  password: yup.string().required().min(8).max(16),
+  code: yup.number(),
+});
 
 const initialValues = {
   email: '',
   password: '',
   isRemebered: false,
-  isEmailValid: true
+  isEmailValid: true,
 };
 
 class LoginForm extends Component {
@@ -21,14 +29,54 @@ class LoginForm extends Component {
     e.preventDefault();
 
     const { email, password } = this.state;
-    console.log(email);
-    console.log(password);
+
+    const validData = {
+      email: 'user@gmail.com',
+      password: '1234test2134',
+      code: 15,
+    };
+
+    const invalidData = {
+      email: 'user@gmail.com',
+      code: 15,
+    };
+
+    /*
+      validate / validateSync - повертає пройшовшу валідацію річ або кидає помилку
+      isValid / isValidSync - повертає булее значення чи пройшли дані валідацію
+
+      методи без суффікса Sync є аснхроними і повертають проміси з аналогічними даними
+    */
+
+    // асинхронні перевіркі
+    // loginSchema.isValid(validData).then(result => {console.log(result)});
+    // loginSchema.isValid(invalidData).then(result => {console.log(result)});
+
+    // loginSchema.validate(validData).then(result => {console.log(result)});
+    loginSchema
+      .validate(validData)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.dir(err));
+
+    // синхронні перевіркі
+    // const isValidLoginData = loginSchema.isValidSync(validData);
+    const validatedObj = loginSchema.validateSync(validData);
+
+    try {
+      loginSchema.validateSync(invalidData);
+    } catch (error) {
+      console.dir(error);
+    }
+
+    // console.log(res1);
 
     this.setState({
       ...initialValues,
     });
   };
-  
+
   handleChange = ({ target: { name, value, checked, type } }) => {
     const isCheckbox = type === 'checkbox';
 
@@ -36,17 +84,15 @@ class LoginForm extends Component {
       [name]: isCheckbox ? checked : value,
     };
 
-    if(name === 'email') {
-      newState.isEmailValid = !value.includes(' ');
-    }
-
     this.setState(newState);
   };
 
   render() {
     const { email, password, isRemebered, isEmailValid } = this.state;
 
-    const emailClassNames = `${styles.input} ${isEmailValid ? styles.validInput : styles.invalidInput}`;
+    const emailClassNames = `${styles.input} ${
+      isEmailValid ? styles.validInput : styles.invalidInput
+    }`;
 
     return (
       <form onSubmit={this.handleSubmit} className={styles.container}>
@@ -76,7 +122,9 @@ class LoginForm extends Component {
           Is remembered
         </label>
 
-        <button className={styles.btn} type="submit">Login</button>
+        <button className={styles.btn} type="submit">
+          Login
+        </button>
       </form>
     );
   }
