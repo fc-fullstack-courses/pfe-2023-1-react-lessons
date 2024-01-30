@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 import CONSTANTS from '../../constants';
 import { withUser, withTheme } from '../../hocs';
@@ -24,27 +25,26 @@ function Header({ user, theme, setTheme }) {
         якщо значення брехливе, то класс не буде додано
   */
   // const testClasses = classNames('class-1', 'class-2','test', { class4: false, class5: true });
-  
-  const classes = classNames(styles.header, {
-    [styles.lightTheme] : theme === THEMES.LIGHT, 
-    [styles.darkTheme] : theme === THEMES.DARK
-  } );
+
+
 
   return (
-    <header className={classes}>
-      <h1>Our site</h1>
-      <h2>
-        Hello {user.firstName} {user.lastName}
-      </h2>
-      <select
-        value={theme}
-        onChange={(e) => {
-          setTheme(e.target.value);
-        }}
-      >
-        <option value={THEMES.LIGHT}>Light theme</option>
-        <option value={THEMES.DARK}>DarkTheme</option>
-      </select>
+    <header>
+      <h1>Site</h1>
+      <nav>
+        <ul>
+          {/* Використовуємо Link замість а  з пропом to замість href */}
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/contacts">Contacts</Link>
+          </li>
+          <li>
+            <Link to="/about">About us</Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }
@@ -57,4 +57,4 @@ function Header({ user, theme, setTheme }) {
 
 // export default HeaderWithUserAndTheme;
 
-export default withTheme(withUser(Header));
+export default Header;

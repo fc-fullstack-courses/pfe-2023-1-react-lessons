@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ContactsPage from './pages/ContactsPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,23 +15,6 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         {/* завжди малюється */}
-        <header>
-          <h1>Site</h1>
-          <nav>
-            <ul>
-              {/* Використовуємо Link замість а  з пропом to замість href */}
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/contacts">Contacts</Link>
-              </li>
-              <li>
-                <Link to="/about">About us</Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
         {/* малювати за умовою, пов'язаною з урлою */}
         <Switch>
           {/* конкрентний маршрут, світч відмальовую перший маршрут який задовільняє урлі */}
@@ -38,77 +23,18 @@ class App extends React.Component {
             {(routeProps) => <HomePage {...routeProps} />}
           </Route>
 
-          <Route path="/contacts" render={(routeProps) => <ContactsPage {...routeProps} />} />
+          <Route
+            path="/contacts"
+            render={(routeProps) => <ContactsPage {...routeProps} />}
+          />
 
-          <Route path="/about" component={AboutUsPage} />
-
-          <Route path="/profile/:id" component={ProfilePage}/>
-
+          {/* <Route path="/about" component={AboutUsPage} />
+          <Route path="/profile/:id" component={ProfilePage} /> */}
         </Switch>
       </BrowserRouter>
     );
   }
 }
-
-function HomePage(props) {
-  console.log(props);
-
-  // setTimeout(() => {props.history.push('/about')},5000);
-
-  return (
-    <div>
-      <h2>Home page</h2>
-    </div>
-  );
-}
-
-function ContactsPage(props) {
-  console.log(props);
-  return (
-    <div>
-      {props.location.pathname === '/contacts' && <p>You are on contacts page</p>}
-      <h2>Contacts page</h2>
-    </div>
-  );
-}
-
-function AboutUsPage(props) {
-  console.log(props.match);
-  return (
-    <div>
-      <h2>About us page</h2>
-    </div>
-  );
-}
-
-function ProfilePage(props) {
-  console.log(props.match);
-  return (
-    <div>
-      <h2>Profile {props.match.params.id} page</h2>
-    </div>
-  );
-}
-/*
-  У компоненті App у стейті зберігати стрінгу, яка описує поточну тему вашого сайту 
-  (денна, нічна...)
-  Створити (якщо таких ще намає) компоненти Header, MainContent і Sidebar
-  Структура має бути такою:
-
-  App
-    Header
-    MainContent
-      Sidebar
-
-  У компонентах Header і Sidebar отримати значення теми сайту, не використовуючи пропси
-*/
-
-/*
-  Під'єднайте будь'які 2 компоненти до контексту теми за допомогою 
-  withTheme 
-  класи в компонентах при цьому умовно рендерити за допомогою бібліотеки classNames
-  стилі для тем зробіть з використанням SASS шаблонів
-*/
 
 export default App;
 
