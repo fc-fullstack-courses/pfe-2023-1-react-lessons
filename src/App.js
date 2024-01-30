@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ContactsPage from './pages/ContactsPage';
+import LoginPage from './pages/LoginPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,6 +28,8 @@ class App extends React.Component {
             path="/contacts"
             render={(routeProps) => <ContactsPage {...routeProps} />}
           />
+
+          <Route path="/login" component={LoginPage} />
 
           {/* <Route path="/about" component={AboutUsPage} />
           <Route path="/profile/:id" component={ProfilePage} /> */}

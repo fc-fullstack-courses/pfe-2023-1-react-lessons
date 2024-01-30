@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import styles from './loginForm.module.css';
 
-// console.log(styles);
-
 const initialValues = {
   email: '',
   password: '',
@@ -23,36 +21,14 @@ class LoginForm extends Component {
     e.preventDefault();
 
     const { email, password } = this.state;
-
-    // console.log(e.target.elements.email.value);
-    // console.log(e.target.elements.password.value);
-    // const {} = e;
-
     console.log(email);
     console.log(password);
 
-    // e.target.reset();
     this.setState({
       ...initialValues,
     });
   };
-
-  // handleEmailChange = (e) => {
-  //   console.log(e.target.value);
-
-  //   this.setState({
-  //     email: e.target.value,
-  //   });
-  // };
-
-  /*
-    зробити керованим інпут з паролем
-  */
-
-  // handlePasswordChange = ({ target: { value } }) => {
-  //   this.setState({ password: value });
-  // };
-
+  
   handleChange = ({ target: { name, value, checked, type } }) => {
     const isCheckbox = type === 'checkbox';
 

@@ -43,6 +43,9 @@ function Header({ user, theme, setTheme }) {
           <li>
             <Link to="/about">About us</Link>
           </li>
+          <li>
+            <Link to="/login">Login page</Link>
+          </li>
         </ul>
       </nav>
     </header>
