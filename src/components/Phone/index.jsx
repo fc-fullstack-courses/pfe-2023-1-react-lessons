@@ -104,5 +104,15 @@ Phone.propTypes = {
   addToCart: PropTypes.func.isRequired,
 };
 
+Phone.defaultProps = {
+  toggleFavorite: () => { alert('YOU FORGOT toggleFavorite')},
+  phone : {
+    id: 1,
+    color: 'WHERE IS PHONE DATA',
+    price: -999999999999999,
+    isFavorite: true
+  }
+}
+
 export default Phone;
 export { phonePropType };
