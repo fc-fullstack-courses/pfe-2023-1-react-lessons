@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /*
   1. завантажити дані
@@ -48,6 +49,11 @@ class DataLoader extends Component {
 
     return layout;
   }
+}
+
+DataLoader.propTypes = {
+  loadData: PropTypes.func,
+  children: PropTypes.func
 }
 
 export default DataLoader;

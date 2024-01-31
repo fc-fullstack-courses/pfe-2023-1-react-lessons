@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './style.css';
 
 class Phone extends React.Component {
@@ -90,4 +91,18 @@ function PhoneOffText() {
   return <p>Phone is currently off</p>;
 }
 
+const phonePropType = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  isFavorite: PropTypes.bool,
+  color: PropTypes.string.isRequired,
+});
+
+Phone.propTypes = {
+  phone: phonePropType.isRequired,
+  toggleFavorite: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
+};
+
 export default Phone;
+export { phonePropType };

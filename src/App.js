@@ -4,6 +4,8 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ContactsPage from './pages/ContactsPage';
 import LoginPage from './pages/LoginPage';
+import DataLoader from './components/DataLoader';
+import PhoneDashboard from './components/PhoneDashboard';
 
 class App extends React.Component {
   constructor(props) {
@@ -34,7 +36,8 @@ class App extends React.Component {
           {/* <Route path="/about" component={AboutUsPage} />
           <Route path="/profile/:id" component={ProfilePage} /> */}
         </Switch>
-      </BrowserRouter>
+        <PhoneDashboard />
+       </BrowserRouter>
     );
   }
 }

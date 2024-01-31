@@ -1,16 +1,20 @@
 import React from 'react';
-import Phone from '../Phone';
+import PropTypes from 'prop-types';
+import Phone, { phonePropType } from '../Phone';
 
 class PhoneList extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  
-
   render() {
-
-    const { phones, toggleFavorite, addToCart, isDirectSortOrder, toggleSortOrder } = this.props;
+    const {
+      phones,
+      toggleFavorite,
+      addToCart,
+      isDirectSortOrder,
+      toggleSortOrder,
+    } = this.props;
 
     // const elems = (
     //   <>
@@ -29,7 +33,7 @@ class PhoneList extends React.Component {
         key={phone.id}
         phone={phone}
         toggleFavorite={toggleFavorite}
-        addToCart={addToCart}
+        addToCart={toggleFavorite}
       />
     ));
 
@@ -48,6 +52,10 @@ class PhoneList extends React.Component {
       </>
     );
   }
+}
+
+PhoneList.propTypes = {
+  phones: PropTypes.arrayOf(phonePropType).isRequired
 }
 
 export default PhoneList;
