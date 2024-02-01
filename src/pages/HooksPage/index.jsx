@@ -10,8 +10,9 @@ const HooksPage = () => {
   */
   const [clicks, setClick] = useState(0);
   const [step, setStep] = useState(1);
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
 
-  function handleClick() {
+  function handleClick(e) {
     // сюди одразу передаємо нове значення стану
     setClick(clicks + step);
   }
@@ -20,10 +21,25 @@ const HooksPage = () => {
     setStep(+newStep);
   }
 
+  function handleChangeCoords({clientX, clientY}) {
+    setCoords({
+      x: clientX,
+      y: clientY
+    });
+  }
+
   return (
     <>
       <Header />
-      <div>
+      <div
+        style={{
+          border: '1px solid black',
+          padding: '20px',
+        }}
+        onMouseMove={handleChangeCoords}
+      >
+        <p>X: {coords.x}</p>
+        <p>Y: {coords.y}</p>
         <p>Clicks: {clicks}</p>
         <button onClick={handleClick}>Click me!!!</button>
         <label>
