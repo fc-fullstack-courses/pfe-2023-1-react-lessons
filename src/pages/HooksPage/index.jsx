@@ -26,12 +26,32 @@ const HooksPage = () => {
       console.log('clearEffect');
       document.body.removeEventListener('mousemove', handleChangeCoords);
     };
-  });
+    // 2 (необов'язковий) аргумент useEffect - масив залежностей
+    // в нього значеннями ви можете закинути будь-які дані
+    // якщо при ререндері ці дані зміняться то ефекти запустяться знову
+    // інакше повторний виклик буде пропущено
+  }, []);
 
   function handleClick(e) {
     // сюди одразу передаємо нове значення стану
     setClick(clicks + step);
+    console.log(`clicks ${clicks}`);
+    console.log(`step: ${step}`);
   }
+
+  useEffect(() => {
+    console.log('clicks effect');
+
+    document.body.addEventListener('click', handleClick);
+
+    return () => {
+      document.body.removeEventListener('click', handleClick);
+    };
+  }, [clicks, step]);
+
+  useEffect(() => {
+    console.log('clicks changed');
+  }, [clicks]);
 
   function handleStep({ target: { value: newStep } }) {
     setStep(+newStep);
@@ -59,7 +79,7 @@ const HooksPage = () => {
         <p>X: {coords.x}</p>
         <p>Y: {coords.y}</p>
         <p>Clicks: {clicks}</p>
-        <button onClick={handleClick}>Click me!!!</button>
+        {/* <button onClick={handleClick}>Click me!!!</button> */}
         <label>
           set step:
           <select value={step} onChange={handleStep}>
