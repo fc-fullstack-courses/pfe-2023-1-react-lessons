@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 
+// тіло функціонального компоненту - аналог render () у класового
+// фетчі сетІнтервали, і інші побічні ефекти напряму тут не розміщувати
 const HooksPage = () => {
   /*
     хук useState приймає початкове значення стану
@@ -12,6 +14,20 @@ const HooksPage = () => {
   const [step, setStep] = useState(1);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
+  useEffect(function effect() {
+    // effect - запускається після рендеру компоненту
+    // у базовому застосуванні є поєднанням componentDidMount і componentDidUpdate
+    console.log('effect');
+    document.body.addEventListener('mousemove', handleChangeCoords);
+
+    // clearEffect - запускається перед розмонтуванням компоненту (componentWillUnmount)
+    // І ТАКОЖ перед кожним запуском effect на ререндері
+    return function clearEffect() {
+      console.log('clearEffect');
+      document.body.removeEventListener('mousemove', handleChangeCoords);
+    };
+  });
+
   function handleClick(e) {
     // сюди одразу передаємо нове значення стану
     setClick(clicks + step);
@@ -21,12 +37,14 @@ const HooksPage = () => {
     setStep(+newStep);
   }
 
-  function handleChangeCoords({clientX, clientY}) {
+  function handleChangeCoords({ clientX, clientY }) {
     setCoords({
       x: clientX,
-      y: clientY
+      y: clientY,
     });
   }
+
+  // document.body.addEventListener('mousemove',handleChangeCoords );
 
   return (
     <>
@@ -36,7 +54,7 @@ const HooksPage = () => {
           border: '1px solid black',
           padding: '20px',
         }}
-        onMouseMove={handleChangeCoords}
+        // onMouseMove={handleChangeCoords}
       >
         <p>X: {coords.x}</p>
         <p>Y: {coords.y}</p>
