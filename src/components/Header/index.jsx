@@ -38,6 +38,9 @@ function Header({ user, theme, setTheme }) {
             <Link to="/">Home</Link>
           </li>
           <li>
+            <Link to="/hooks">Hooks</Link>
+          </li>
+          <li>
             <Link to="/contacts">Contacts</Link>
           </li>
           <li>
