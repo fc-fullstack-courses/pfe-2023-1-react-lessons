@@ -1,96 +1,66 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getUsers } from '../../api';
-class UserLoader extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      users: [],
-      isError: false,
-      isLoading: false,
-      currentPage: 1,
-    };
-  }
+const UserLoader = () => {
+  const [users, setUsers] = useState([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  load = async () => {
-    const { currentPage } = this.state;
-    this.setState({
-      isLoading: true,
-    });
+  const load = async () => {
+    setIsLoading(true);
 
     try {
       const results = await getUsers({ page: currentPage });
-
-      this.setState({ users: results });
+      setUsers(results);
     } catch (error) {
-      this.setState({ isError: true });
+      setIsError(true);
     } finally {
-      this.setState({
-        isLoading: false,
-      });
+      setIsLoading(false);
     }
   };
 
-  componentDidMount() {
-    this.load();
-  }
+  useEffect(() => {
+    load();
+  }, [currentPage]);
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.currentPage !== this.state.currentPage) {
-      this.load();
-    }
-  }
-
-  handleChangePage = (isNext) => {
-    const { currentPage } = this.state;
-
-    if (isNext) {
-      this.setState({
-        currentPage: currentPage + 1,
-      });
-    } else {
-      this.setState({
-        currentPage: currentPage > 1 ? currentPage - 1 : 1,
-      });
-    }
-  };
-
-  render() {
-    const { users, isError, isLoading } = this.state;
-
-    if (isLoading) {
-      return <h1>LOADING USERS ...</h1>;
-    }
-
-    if (isError) {
-      return <h1>ERROR HAPPENED</h1>;
-    }
-
-    const userCards = users.map(
-      ({
-        name: { first, last },
-        picture: { thumbnail: src },
-        login: { uuid },
-      }) => (
-        <article key={uuid}>
-          <h2>
-            {first} {last}
-          </h2>
-          <img src={src} alt={`${first} ${last}`} />
-        </article>
-      )
+  const handleChangePage = (isNext) => {
+    setCurrentPage((prevPage) =>
+      isNext ? prevPage + 1 : prevPage > 1 ? prevPage - 1 : 1
     );
+  };
 
-    return (
+  if (isLoading) {
+    return <h1>LOADING USERS ...</h1>;
+  }
+
+  if (isError) {
+    return <h1>ERROR HAPPENED</h1>;
+  }
+
+  const userCards = users.map(
+    ({
+      name: { first, last },
+      picture: { thumbnail: src },
+      login: { uuid },
+    }) => (
+      <article key={uuid}>
+        <h2>
+          {first} {last}
+        </h2>
+        <img src={src} alt={`${first} ${last}`} />
+      </article>
+    )
+  );
+  return (
+    <div>
       <div>
-        <div>
-          <button onClick={() => this.handleChangePage(false)}>Prev</button>
-          <button onClick={() => this.handleChangePage(true)}>Next</button>
-        </div>
-        {userCards}
+        <button onClick={() => handleChangePage(false)}>Prev</button>
+        <button onClick={() => handleChangePage(true)}>Next</button>
       </div>
-    );
-  }
-}
+      {userCards}
+    </div>
+  );
+};
 
 export default UserLoader;
