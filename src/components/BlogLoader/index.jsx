@@ -1,61 +1,43 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
-class BlogLoader extends Component {
-  constructor(props) {
-    super(props);
+function BlogLoader(props) {
+  const [posts, setPosts] = useState([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-    this.state = {
-      posts: [],
-      isLoading: false,
-      isError: false,
-    };
-  }
-
-  componentDidMount() {
-    this.setState({
-      isLoading: true,
-    });
+  useEffect(() => {
+    setIsLoading(true);
 
     fetch('/posts.json')
       .then((res) => res.json())
       .then((posts) => {
-        this.setState({
-          posts,
-        });
+        setPosts(posts);
       })
       .catch((err) => {
-        this.setState({
-          isError: true,
-        });
+        setIsError(true);
       })
       .finally(() => {
-        this.setState({
-          isLoading: false,
-        });
+        setIsLoading(false);
       });
+  }, []);
+
+  const postList = posts.map((post) => (
+    <article key={post.id}>
+      <h2>{post.title}</h2>
+      <p>{post.text}</p>
+      <button>Learn more</button>
+    </article>
+  ));
+
+  if (isLoading) {
+    return <h1>LOADING ...</h1>;
   }
 
-  render() {
-    const { posts, isError, isLoading } = this.state;
-
-    const postList = posts.map((post) => (
-      <article key={post.id}>
-        <h2>{post.title}</h2>
-        <p>{post.text}</p>
-        <button>Learn more</button>
-      </article>
-    ));
-
-    if(isLoading) {
-      return <h1>LOADING ...</h1>
-    }
-
-    if(isError) {
-      return <h1>ERROR HAPPENED</h1>
-    }
-
-    return <div>{postList}</div>;
+  if (isError) {
+    return <h1>ERROR HAPPENED</h1>;
   }
+
+  return <div>{postList}</div>;
 }
 
 export default BlogLoader;
