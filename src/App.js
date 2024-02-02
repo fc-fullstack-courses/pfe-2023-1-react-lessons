@@ -6,22 +6,19 @@ import ContactsPage from './pages/ContactsPage';
 import LoginPage from './pages/LoginPage';
 import HooksPage from './pages/HooksPage';
 import Clicker from './components/Clicker';
+import { UserContext } from './contexts';
 
 function App() {
-  const [isPageShown, setIsPageShown] = useState(true);
+  const [user, setUsers] = useState({
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+  });
 
   return (
     <BrowserRouter>
-      {/* завжди малюється */}
-      {/* малювати за умовою, пов'язаною з урлою */}
-      <button onClick={() => setIsPageShown(!isPageShown)}>
-        Toggle page visibility
-      </button>
-      <Clicker />
-      {isPageShown && (
+      <UserContext.Provider value={user}>
         <Switch>
-          {/* конкрентний маршрут, світч відмальовую перший маршрут який задовільняє урлі */}
-          {/* в урлі частина pathname має хбігатися зі пропом path */}
           <Route exact path="/">
             {(routeProps) => <HomePage {...routeProps} />}
           </Route>
@@ -33,11 +30,8 @@ function App() {
 
           <Route path="/hooks" component={HooksPage} />
           <Route path="/login" component={LoginPage} />
-
-          {/* <Route path="/about" component={AboutUsPage} />
-          <Route path="/profile/:id" component={ProfilePage} /> */}
         </Switch>
-      )}
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }
