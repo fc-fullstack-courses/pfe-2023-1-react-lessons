@@ -10,12 +10,17 @@ class Clicker extends Component {
   }
 
   handleClick = () => {
-    const { clicks } = this.state;
-
     console.log('click');
 
-    this.setState({
-      clicks: clicks + 1,
+    this.setState((state) => {
+      return {
+        clicks: state.clicks + 1
+      }
+    });
+    this.setState((state) => {
+      return {
+        clicks: state.clicks + 1
+      }
     });
   };
 

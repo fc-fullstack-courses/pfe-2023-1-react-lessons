@@ -32,11 +32,32 @@ const HooksPage = () => {
     // інакше повторний виклик буде пропущено
   }, []);
 
-  function handleClick(e) {
-    // сюди одразу передаємо нове значення стану
-    setClick(clicks + step);
-    console.log(`clicks ${clicks}`);
-    console.log(`step: ${step}`);
+  // function handleClick(e) {
+  //   // сюди одразу передаємо нове значення стану
+  //   setClick(clicks + step);
+  //   console.log(`clicks ${clicks}`);
+  //   console.log(`step: ${step}`);
+  // }
+
+  // useEffect(() => {
+  //   console.log('clicks effect');
+
+  //   document.body.addEventListener('click', handleClick);
+
+  //   return () => {
+  //     document.body.removeEventListener('click', handleClick);
+  //   };
+  // }, [clicks, step]);
+
+  function handleClick() {
+
+    setStep((prevStep => {
+      setClick((prevClicks) => prevClicks + prevStep);
+
+      return prevStep;
+    }));
+    
+    console.log('handleClick');
   }
 
   useEffect(() => {
@@ -47,7 +68,8 @@ const HooksPage = () => {
     return () => {
       document.body.removeEventListener('click', handleClick);
     };
-  }, [clicks, step]);
+  }, []);
+
 
   useEffect(() => {
     console.log('clicks changed');

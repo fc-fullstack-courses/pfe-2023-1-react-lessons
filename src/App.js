@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import ContactsPage from './pages/ContactsPage';
 import LoginPage from './pages/LoginPage';
 import HooksPage from './pages/HooksPage';
+import Clicker from './components/Clicker';
 
 function App() {
   const [isPageShown, setIsPageShown] = useState(true);
@@ -16,6 +17,7 @@ function App() {
       <button onClick={() => setIsPageShown(!isPageShown)}>
         Toggle page visibility
       </button>
+      <Clicker />
       {isPageShown && (
         <Switch>
           {/* конкрентний маршрут, світч відмальовую перший маршрут який задовільняє урлі */}
