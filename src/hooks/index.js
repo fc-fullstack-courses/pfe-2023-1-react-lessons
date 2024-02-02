@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function useData(loadData) {
   const [data, setData] = useState([]);
@@ -25,4 +25,25 @@ export function useData(loadData) {
   }, []);
 
   return { data, isError, isLoading };
+}
+
+export function useCoords() {
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+
+  function handleChangeCoords({ clientX, clientY }) {
+    setCoords({
+      x: clientX,
+      y: clientY,
+    });
+  }
+
+  useEffect(() => {
+    document.body.addEventListener('mousemove', handleChangeCoords);
+
+    return () => {
+      document.body.removeEventListener('mousemove', handleChangeCoords);
+    }
+  },[]);
+
+  return coords;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
+import { useCoords } from '../../hooks';
 
 // тіло функціонального компоненту - аналог render () у класового
 // фетчі сетІнтервали, і інші побічні ефекти напряму тут не розміщувати
@@ -12,7 +13,7 @@ const HooksPage = () => {
   */
   const [clicks, setClick] = useState(0);
   const [step, setStep] = useState(1);
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const coords = useCoords();
 
   // НЕПРАВИЛЬНО
   // if(5 > 10) {
@@ -22,55 +23,19 @@ const HooksPage = () => {
   // }
 
   // ПРАВИЛЬНО
-  useEffect(()=> {
-    if(5 > 10) {
+  useEffect(() => {
+    if (5 > 10) {
       console.log('some stuff');
     }
   });
 
-  useEffect(function effect() {
-    // effect - запускається після рендеру компоненту
-    // у базовому застосуванні є поєднанням componentDidMount і componentDidUpdate
-    console.log('effect');
-    document.body.addEventListener('mousemove', handleChangeCoords);
-
-    // clearEffect - запускається перед розмонтуванням компоненту (componentWillUnmount)
-    // І ТАКОЖ перед кожним запуском effect на ререндері
-    return function clearEffect() {
-      console.log('clearEffect');
-      document.body.removeEventListener('mousemove', handleChangeCoords);
-    };
-    // 2 (необов'язковий) аргумент useEffect - масив залежностей
-    // в нього значеннями ви можете закинути будь-які дані
-    // якщо при ререндері ці дані зміняться то ефекти запустяться знову
-    // інакше повторний виклик буде пропущено
-  }, []);
-
-  // function handleClick(e) {
-  //   // сюди одразу передаємо нове значення стану
-  //   setClick(clicks + step);
-  //   console.log(`clicks ${clicks}`);
-  //   console.log(`step: ${step}`);
-  // }
-
-  // useEffect(() => {
-  //   console.log('clicks effect');
-
-  //   document.body.addEventListener('click', handleClick);
-
-  //   return () => {
-  //     document.body.removeEventListener('click', handleClick);
-  //   };
-  // }, [clicks, step]);
-
   function handleClick() {
-
-    setStep((prevStep => {
+    setStep((prevStep) => {
       setClick((prevClicks) => prevClicks + prevStep);
 
       return prevStep;
-    }));
-    
+    });
+
     console.log('handleClick');
   }
 
@@ -84,7 +49,6 @@ const HooksPage = () => {
     };
   }, []);
 
-
   useEffect(() => {
     console.log('clicks changed');
   }, [clicks]);
@@ -92,15 +56,6 @@ const HooksPage = () => {
   function handleStep({ target: { value: newStep } }) {
     setStep(+newStep);
   }
-
-  function handleChangeCoords({ clientX, clientY }) {
-    setCoords({
-      x: clientX,
-      y: clientY,
-    });
-  }
-
-  // document.body.addEventListener('mousemove',handleChangeCoords );
 
   return (
     <>
