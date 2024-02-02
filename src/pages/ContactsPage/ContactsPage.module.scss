@@ -1,0 +1,9 @@
+@import '../../common/styles/templates';
+
+.light {
+  @extend %lightTheme;
+}
+
+.dark {
+  @extend %darkTheme;
+}

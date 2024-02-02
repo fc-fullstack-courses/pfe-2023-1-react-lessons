@@ -5,8 +5,8 @@ import HomePage from './pages/HomePage';
 import ContactsPage from './pages/ContactsPage';
 import LoginPage from './pages/LoginPage';
 import HooksPage from './pages/HooksPage';
-import Clicker from './components/Clicker';
-import { UserContext } from './contexts';
+import { UserContext, ThemeContext } from './contexts';
+import CONSTANTS from './constants';
 
 function App() {
   const [user, setUsers] = useState({
@@ -14,23 +14,26 @@ function App() {
     firstName: 'John',
     lastName: 'Doe',
   });
+  const [theme, setTheme] = useState(CONSTANTS.THEMES.DARK);
 
   return (
     <BrowserRouter>
       <UserContext.Provider value={user}>
-        <Switch>
-          <Route exact path="/">
-            {(routeProps) => <HomePage {...routeProps} />}
-          </Route>
+        <ThemeContext.Provider value={[theme, setTheme]}>
+          <Switch>
+            <Route exact path="/">
+              {(routeProps) => <HomePage {...routeProps} />}
+            </Route>
 
-          <Route
-            path="/contacts"
-            render={(routeProps) => <ContactsPage {...routeProps} />}
-          />
+            <Route
+              path="/contacts"
+              render={(routeProps) => <ContactsPage {...routeProps} />}
+            />
 
-          <Route path="/hooks" component={HooksPage} />
-          <Route path="/login" component={LoginPage} />
-        </Switch>
+            <Route path="/hooks" component={HooksPage} />
+            <Route path="/login" component={LoginPage} />
+          </Switch>
+        </ThemeContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>
   );
