@@ -14,6 +14,20 @@ const HooksPage = () => {
   const [step, setStep] = useState(1);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
+  // НЕПРАВИЛЬНО
+  // if(5 > 10) {
+  //   useEffect(() => {
+  //     console.log('some stuff')
+  //   });
+  // }
+
+  // ПРАВИЛЬНО
+  useEffect(()=> {
+    if(5 > 10) {
+      console.log('some stuff');
+    }
+  });
+
   useEffect(function effect() {
     // effect - запускається після рендеру компоненту
     // у базовому застосуванні є поєднанням componentDidMount і componentDidUpdate
