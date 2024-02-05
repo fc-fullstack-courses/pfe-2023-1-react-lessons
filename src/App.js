@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
@@ -15,6 +15,15 @@ function App() {
     lastName: 'Doe',
   });
   const [theme, setTheme] = useState(CONSTANTS.THEMES.DARK);
+
+
+  useEffect(() => {
+    console.log('did mount');
+
+    return () => {
+      console.log('will unmount');
+    }
+  },[]);
 
   return (
     <BrowserRouter>

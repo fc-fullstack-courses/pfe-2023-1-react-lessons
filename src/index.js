@@ -54,4 +54,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // використовувати якщо треба порендирити декілька елементівв без видимого контейнеру
 // ! не передавати атрибути / пропси
 // <></> === <React.Fragment></React.Fragment> === React.createElement(React.Fragment)
-root.render(<App />);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
