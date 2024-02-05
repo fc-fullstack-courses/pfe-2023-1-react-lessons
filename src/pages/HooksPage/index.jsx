@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
-import { useCoords } from '../../hooks';
+import { useCoords, useClicker } from '../../hooks';
 
 // тіло функціонального компоненту - аналог render () у класового
 // фетчі сетІнтервали, і інші побічні ефекти напряму тут не розміщувати
@@ -11,9 +11,10 @@ const HooksPage = () => {
       перше елемент - поточне значення стану
       другий - персональний setState для зміни цього стану
   */
-  const [clicks, setClick] = useState(0);
+  // const [clicks, setClick] = useState(0);
   const [step, setStep] = useState(1);
   const coords = useCoords();
+  const clicks = useClicker();
 
   // НЕПРАВИЛЬНО
   // if(5 > 10) {
@@ -29,25 +30,25 @@ const HooksPage = () => {
     }
   });
 
-  function handleClick() {
-    setStep((prevStep) => {
-      setClick((prevClicks) => prevClicks + prevStep);
+  // function handleClick() {
+  //   setStep((prevStep) => {
+  //     setClick((prevClicks) => prevClicks + prevStep);
 
-      return prevStep;
-    });
+  //     return prevStep;
+  //   });
 
-    console.log('handleClick');
-  }
+  //   console.log('handleClick');
+  // }
 
-  useEffect(() => {
-    console.log('clicks effect');
+  // useEffect(() => {
+  //   console.log('clicks effect');
 
-    document.body.addEventListener('click', handleClick);
+  //   document.body.addEventListener('click', handleClick);
 
-    return () => {
-      document.body.removeEventListener('click', handleClick);
-    };
-  }, []);
+  //   return () => {
+  //     document.body.removeEventListener('click', handleClick);
+  //   };
+  // }, []);
 
   useEffect(() => {
     console.log('clicks changed');
