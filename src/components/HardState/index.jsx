@@ -8,6 +8,7 @@ const initialState = {
   },
 };
 
+// функція яка поверне нове значення стану, яке реакт збереже і викличе ререндер
 function reducer(state, action) {
   switch (action.type) {
     case 'number': {
@@ -39,8 +40,10 @@ const HardState = (props) => {
 
   // тут теж 5+
   function handleChange({ target: { value } }) {
+    // дані для ред'юсеру які дозволяють зрозуміти яку логіку стану використовувати
     const action = { type: 'number', payload: +value };
 
+    // відправка action каже реакту запускати ред'юсер
     dispatch(action);
 
     // setNumber(+value);
