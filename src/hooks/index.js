@@ -42,26 +42,29 @@ export function useCoords() {
 
     return () => {
       document.body.removeEventListener('mousemove', handleChangeCoords);
-    }
-  },[]);
+    };
+  }, []);
 
   return coords;
 }
 
-export function useClicker () {
+export function useClicker(elemRef) {
   const [clicks, setClicks] = useState(0);
 
-  function handleClick () {
+  function handleClick() {
     setClicks((clicks) => clicks + 1);
   }
 
   useEffect(() => {
-    document.body.addEventListener('click', handleClick);
+    const elem = elemRef.current ? elemRef.current : document.body;
+    // const elem = elemRef.current ?? document.body;
+
+    elem.addEventListener('click', handleClick);
 
     return () => {
-      document.body.removeEventListener('click', handleClick);
-    }
-  }, []);
+      elem.removeEventListener('click', handleClick);
+    };
+  }, [elemRef]);
 
   return clicks;
 }

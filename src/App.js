@@ -17,13 +17,13 @@ function App() {
   const [theme, setTheme] = useState(CONSTANTS.THEMES.DARK);
 
 
-  useEffect(() => {
-    console.log('did mount');
+  // useEffect(() => {
+  //   console.log('did mount');
 
-    return () => {
-      console.log('will unmount');
-    }
-  },[]);
+  //   return () => {
+  //     console.log('will unmount');
+  //   }
+  // },[]);
 
   return (
     <BrowserRouter>

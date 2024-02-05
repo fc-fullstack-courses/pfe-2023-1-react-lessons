@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import Header from '../../components/Header';
 import { useCoords, useClicker } from '../../hooks';
 
@@ -13,8 +13,14 @@ const HooksPage = () => {
   */
   // const [clicks, setClick] = useState(0);
   const [step, setStep] = useState(1);
-  const coords = useCoords();
-  const clicks = useClicker();
+
+  const refContainer = useRef(null);
+
+  // const coords = useCoords();
+  const clicks = useClicker(refContainer);
+
+  // refContainer - об'єкт з властивістю current
+  console.dir(refContainer.current);
 
   // НЕПРАВИЛЬНО
   // if(5 > 10) {
@@ -51,7 +57,7 @@ const HooksPage = () => {
   // }, []);
 
   useEffect(() => {
-    console.log('clicks changed');
+    // console.log('clicks changed');
   }, [clicks]);
 
   function handleStep({ target: { value: newStep } }) {
@@ -66,10 +72,11 @@ const HooksPage = () => {
           border: '1px solid black',
           padding: '20px',
         }}
+        ref={refContainer}
         // onMouseMove={handleChangeCoords}
       >
-        <p>X: {coords.x}</p>
-        <p>Y: {coords.y}</p>
+        {/* <p>X: {coords.x}</p>
+        <p>Y: {coords.y}</p> */}
         <p>Clicks: {clicks}</p>
         {/* <button onClick={handleClick}>Click me!!!</button> */}
         <label>
