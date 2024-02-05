@@ -20,7 +20,14 @@ const HooksPage = () => {
   const clicks = useClicker(refContainer);
 
   // refContainer - об'єкт з властивістю current
-  console.dir(refContainer.current);
+  // console.dir(refContainer.current);
+
+  const prevStep = useRef(null);
+  const renders = useRef(1);
+
+  useEffect(() => {
+    renders.current = renders.current + 1;
+  });
 
   // НЕПРАВИЛЬНО
   // if(5 > 10) {
@@ -61,8 +68,14 @@ const HooksPage = () => {
   }, [clicks]);
 
   function handleStep({ target: { value: newStep } }) {
+    prevStep.current = step;
     setStep(+newStep);
   }
+
+  useEffect (() => {
+    console.log(`step is ${step}`);
+    console.log(`prev step is ${prevStep.current}`);
+  }, [step])
 
   return (
     <>
