@@ -1,6 +1,7 @@
 import React, { useState, useEffect,useRef } from 'react';
 import Header from '../../components/Header';
 import { useCoords, useClicker } from '../../hooks';
+import HardState from '../../components/HardState';
 
 // тіло функціонального компоненту - аналог render () у класового
 // фетчі сетІнтервали, і інші побічні ефекти напряму тут не розміщувати
@@ -101,6 +102,7 @@ const HooksPage = () => {
           </select>
         </label>
       </div>
+      <HardState />
     </>
   );
 };
