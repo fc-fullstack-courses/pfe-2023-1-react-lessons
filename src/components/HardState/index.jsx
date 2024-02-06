@@ -9,6 +9,7 @@ const initialState = {
 };
 
 // функція яка поверне нове значення стану, яке реакт збереже і викличе ререндер
+// допрацювати ред'юсер, додати йому логіку зміни стану для координат
 function reducer(state, action) {
   switch (action.type) {
     case 'number': {
@@ -16,6 +17,15 @@ function reducer(state, action) {
         ...state,
         number: action.payload,
       };
+
+      return newState;
+    }
+    case 'CHANGE_COORDS': {
+      // const { newCoords: {x, y} } = action;
+      const newState = {
+        ...state,
+        coords: action.newCoords
+      }
 
       return newState;
     }
@@ -61,8 +71,14 @@ const HardState = (props) => {
 
   function handleCoords({ clientX, clientY }) {
     const action = {
-      type: 'coords',
+      type: 'CHANGE_COORDS',
+      newCoords: {
+        x: clientX,
+        y: clientY,
+      },
     };
+
+    dispatch(action);
     // setCoords({
     //   x: clientX,
     //   y: clientY
