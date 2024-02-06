@@ -1,3 +1,5 @@
+import ACTION_TYPES from "./actionTypes";
+
 export const initialState = {
   number: 0,
   coords: {
@@ -10,7 +12,7 @@ export const initialState = {
 // допрацювати ред'юсер, додати йому логіку зміни стану для координат
 export default function reducer(state, action) {
   switch (action.type) {
-    case 'number': {
+    case ACTION_TYPES.CHANGE_NUMBER: {
       const newState = {
         ...state,
         number: action.payload,
@@ -18,11 +20,11 @@ export default function reducer(state, action) {
 
       return newState;
     }
-    case 'CHANGE_COORDS': {
+    case ACTION_TYPES.CHANGE_COORDS: {
       // const { newCoords: {x, y} } = action;
       const newState = {
         ...state,
-        coords: action.newCoords
+        coords: action.payload
       }
 
       return newState;
