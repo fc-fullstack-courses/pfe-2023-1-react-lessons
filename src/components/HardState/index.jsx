@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useReducer } from 'react';
-import reducer, { initialState } from './reducer';
+import reducer, { handleChange, initialState } from './reducer';
+import { createChangeCoords, createNumberAction } from './actionCreators';
 
 /*
   допрацювати ред'юсер, додати йому логіку зміни стану для координат
@@ -17,20 +18,17 @@ const HardState = (props) => {
 
   function handleChange({ target: { value } }) {
     // дані для ред'юсеру які дозволяють зрозуміти яку логіку стану використовувати
-    const action = { type: 'number', payload: +value };
+    const action = createNumberAction(value);
 
     // відправка action каже реакту запускати ред'юсер
     dispatch(action);
   }
 
   function handleCoords({ clientX, clientY }) {
-    const action = {
-      type: 'CHANGE_COORDS',
-      newCoords: {
-        x: clientX,
-        y: clientY,
-      },
-    };
+    const action = createChangeCoords({
+      x: clientX,
+      y: clientY,
+    });
 
     dispatch(action);
   }
